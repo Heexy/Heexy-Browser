@@ -586,7 +586,7 @@ pref("browser.urlbar.showSearchTerms.enabled", true);
 
 // Whether the urlbar displays one-offs to filter searches to history,
 // bookmarks, or tabs.
-pref("browser.urlbar.shortcuts.bookmarks", true);
+pref("browser.urlbar.shortcuts.bookmarks", false);
 pref("browser.urlbar.shortcuts.tabs", true);
 pref("browser.urlbar.shortcuts.history", true);
 
@@ -659,7 +659,7 @@ pref("browser.urlbar.pocket.featureGate", false);
 
 // If `browser.urlbar.pocket.featureGate` is true, this controls whether Pocket
 // suggestions are turned on.
-pref("browser.urlbar.suggest.pocket", true);
+pref("browser.urlbar.suggest.pocket", false);
 
 pref("browser.altClickSave", false);
 
@@ -1235,7 +1235,7 @@ pref("browser.preferences.experimental", true);
 #else
 pref("browser.preferences.experimental", false);
 #endif
-pref("browser.preferences.moreFromMozilla", true);
+pref("browser.preferences.moreFromMozilla", false);
 pref("browser.preferences.experimental.hidden", false);
 pref("browser.preferences.defaultPerformanceSettings.enabled", true);
 
@@ -1557,15 +1557,15 @@ pref("services.sync.prefs.sync.browser.crashReports.unsubmittedCheck.autoSubmit2
 pref("services.sync.prefs.sync.browser.ctrlTab.sortByRecentlyUsed", true);
 pref("services.sync.prefs.sync.browser.discovery.enabled", true);
 pref("services.sync.prefs.sync.browser.download.useDownloadDir", true);
-pref("services.sync.prefs.sync.browser.firefox-view.feature-tour", true);
+pref("services.sync.prefs.sync.browser.firefox-view.feature-tour", false);
 pref("services.sync.prefs.sync.browser.formfill.enable", true);
 pref("services.sync.prefs.sync.browser.link.open_newwindow", true);
 pref("services.sync.prefs.sync.browser.menu.showViewImageInfo", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSearch", true);
-pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsored", true);
-pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSites", true);
+pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsored", false);
+pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.feeds.topsites", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.topSitesRows", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.feeds.section.topstories", true);
@@ -1576,7 +1576,7 @@ pref("services.sync.prefs.sync-seen.browser.newtabpage.activity-stream.section.h
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includeVisited", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includeBookmarks", true);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includeDownloads", true);
-pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includePocket", true);
+pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 // Some linux distributions disable just pocket by default.
 pref("services.sync.prefs.sync-seen.browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.highlights.rows", true);
@@ -1594,7 +1594,7 @@ pref("services.sync.prefs.sync.browser.startup.upgradeDialog.enabled", true);
 pref("services.sync.prefs.sync.browser.tabs.loadInBackground", true);
 pref("services.sync.prefs.sync.browser.tabs.warnOnClose", true);
 pref("services.sync.prefs.sync.browser.tabs.warnOnOpen", true);
-pref("services.sync.prefs.sync.browser.taskbar.previews.enable", true);
+pref("services.sync.prefs.sync.browser.taskbar.previews.enable", false);
 pref("services.sync.prefs.sync.browser.urlbar.maxRichResults", true);
 pref("services.sync.prefs.sync.browser.urlbar.showSearchSuggestionsFirst", true);
 pref("services.sync.prefs.sync.browser.urlbar.suggest.bookmark", true);
@@ -1853,14 +1853,14 @@ pref("browser.newtabpage.activity-stream.discoverystream.region-basic-config", "
 pref("browser.newtabpage.activity-stream.discoverystream.pocket-feed-parameters", "");
 
 // Allows Pocket story collections to be dismissed.
-pref("browser.newtabpage.activity-stream.discoverystream.isCollectionDismissible", true);
-pref("browser.newtabpage.activity-stream.discoverystream.personalization.enabled", true);
+pref("browser.newtabpage.activity-stream.discoverystream.isCollectionDismissible", false);
+pref("browser.newtabpage.activity-stream.discoverystream.personalization.enabled", false);
 // Configurable keys used by personalization.
 pref("browser.newtabpage.activity-stream.discoverystream.personalization.modelKeys", "nb_model_arts_and_entertainment, nb_model_autos_and_vehicles, nb_model_beauty_and_fitness, nb_model_blogging_resources_and_services, nb_model_books_and_literature, nb_model_business_and_industrial, nb_model_computers_and_electronics, nb_model_finance, nb_model_food_and_drink, nb_model_games, nb_model_health, nb_model_hobbies_and_leisure, nb_model_home_and_garden, nb_model_internet_and_telecom, nb_model_jobs_and_education, nb_model_law_and_government, nb_model_online_communities, nb_model_people_and_society, nb_model_pets_and_animals, nb_model_real_estate, nb_model_reference, nb_model_science, nb_model_shopping, nb_model_sports, nb_model_travel");
 // System pref to allow Pocket stories personalization to be turned on/off.
 pref("browser.newtabpage.activity-stream.discoverystream.recs.personalized", false);
 // System pref to allow Pocket sponsored content personalization to be turned on/off.
-pref("browser.newtabpage.activity-stream.discoverystream.spocs.personalized", true);
+pref("browser.newtabpage.activity-stream.discoverystream.spocs.personalized", false);
 
 // System pref to enable topic selection for pocket feed
 pref("browser.newtabpage.activity-stream.discoverystream.topicSelection.enabled", false);
@@ -1970,7 +1970,7 @@ pref("browser.uiCustomization.state", "");
 
 // If set to false, FxAccounts and Sync will be unavailable.
 // A restart is mandatory after flipping that preference.
-pref("identity.fxaccounts.enabled", true);
+pref("identity.fxaccounts.enabled", false);
 
 // The remote FxA root content URL. Must use HTTPS.
 pref("identity.fxaccounts.remote.root", "https://accounts.firefox.com/");
@@ -1988,7 +1988,7 @@ pref("identity.fxaccounts.remote.profile.uri", "https://profile.accounts.firefox
 pref("identity.fxaccounts.remote.oauth.uri", "https://oauth.accounts.firefox.com/v1");
 
 // Whether FxA pairing using QR codes is enabled.
-pref("identity.fxaccounts.pairing.enabled", true);
+pref("identity.fxaccounts.pairing.enabled", false);
 
 // The remote URI of the FxA pairing server
 pref("identity.fxaccounts.remote.pairing.uri", "wss://channelserver.services.mozilla.com");
@@ -2428,14 +2428,14 @@ pref("browser.migrate.preferences-entrypoint.enabled", true);
 
 pref("extensions.pocket.api", "api.getpocket.com");
 pref("extensions.pocket.bffApi", "firefox-api-proxy.cdn.mozilla.net");
-pref("extensions.pocket.bffRecentSaves", true);
-pref("extensions.pocket.enabled", true);
+pref("extensions.pocket.bffRecentSaves", false);
+pref("extensions.pocket.enabled", false);
 pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
 pref("extensions.pocket.oAuthConsumerKeyBff", "94110-6d5ff7a89d72c869766af0e0");
 pref("extensions.pocket.site", "getpocket.com");
 
 // Enable Pocket button home panel for non link pages.
-pref("extensions.pocket.showHome", true);
+pref("extensions.pocket.showHome", false);
 
 // Control what version of the logged out doorhanger is displayed
 // Possibilities are: `control`, `control-one-button`, `variant_a`, `variant_b`, `variant_c`
@@ -2572,17 +2572,17 @@ pref("browser.engagement.ctrlTab.has-used", false);
 
 pref("browser.aboutConfig.showWarning", true);
 
-pref("browser.toolbars.keyboard_navigation", true);
+pref("browser.toolbars.keyboard_navigation", false);
 
 // The visibility of the bookmarks toolbar.
 // "newtab": Show on the New Tab Page
 // "always": Always show
 // "never": Never show
-pref("browser.toolbars.bookmarks.visibility", "newtab");
+pref("browser.toolbars.bookmarks.visibility", "never");
 
 // Visibility of the "Show Other Bookmarks" menuitem in the
 // bookmarks toolbar contextmenu.
-pref("browser.toolbars.bookmarks.showOtherBookmarks", true);
+pref("browser.toolbars.bookmarks.showOtherBookmarks", false);
 
 
 // Felt Privacy pref to control simplified private browsing UI
@@ -2592,21 +2592,21 @@ pref("browser.privatebrowsing.felt-privacy-v1", false);
 // This pref will surface existing Firefox Account information
 // as a button next to the hamburger menu. It allows
 // quick access to sign-in and manage your Firefox Account.
-pref("identity.fxaccounts.toolbar.enabled", true);
+pref("identity.fxaccounts.toolbar.enabled", false);
 pref("identity.fxaccounts.toolbar.accessed", false);
-pref("identity.fxaccounts.toolbar.defaultVisible", true);
+pref("identity.fxaccounts.toolbar.defaultVisible", false);
 
 // Prefs to control Firefox Account panels that shows call to actions
 // for other supported Mozilla products
-pref("identity.fxaccounts.toolbar.pxiToolbarEnabled", true);
-pref("identity.fxaccounts.toolbar.pxiToolbarEnabled.monitorEnabled", true);
-pref("identity.fxaccounts.toolbar.pxiToolbarEnabled.relayEnabled", true);
-pref("identity.fxaccounts.toolbar.pxiToolbarEnabled.vpnEnabled", true);
+pref("identity.fxaccounts.toolbar.pxiToolbarEnabled", false);
+pref("identity.fxaccounts.toolbar.pxiToolbarEnabled.monitorEnabled", false);
+pref("identity.fxaccounts.toolbar.pxiToolbarEnabled.relayEnabled", false);
+pref("identity.fxaccounts.toolbar.pxiToolbarEnabled.vpnEnabled", false);
 
 // Toolbox preferences
 pref("devtools.toolbox.footer.height", 250);
 pref("devtools.toolbox.sidebar.width", 500);
-pref("devtools.toolbox.host", "bottom");
+pref("devtools.toolbox.host", "right");
 pref("devtools.toolbox.previousHost", "right");
 pref("devtools.toolbox.selectedTool", "inspector");
 pref("devtools.toolbox.zoomValue", "1");
@@ -3036,7 +3036,7 @@ pref("browser.firefox-view.view-count", 0);
 // Maximum number of rows to show on the "History" page.
 pref("browser.firefox-view.max-history-rows", 300);
 // Enables virtual list functionality in Firefox View.
-pref("browser.firefox-view.virtual-list.enabled", true);
+pref("browser.firefox-view.virtual-list.enabled", false);
 
 // If the user has seen the pdf.js feature tour this value reflects the tour
 // message id, the id of the last screen they saw, and whether they completed the tour
