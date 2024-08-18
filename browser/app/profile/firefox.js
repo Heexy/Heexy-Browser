@@ -739,7 +739,7 @@ pref("browser.search.separatePrivateDefault.ui.banner.max", 0);
 
 // Enables search SERP telemetry page categorization.
 #ifdef NIGHTLY_BUILD
-pref("browser.search.serpEventTelemetryCategorization.enabled", true);
+pref("browser.search.serpEventTelemetryCategorization.enabled", false);
 #else
 pref("browser.search.serpEventTelemetryCategorization.enabled", false);
 #endif
@@ -819,7 +819,7 @@ pref("browser.spin_cursor_while_busy", false);
 // pref("browser.megalist.enabled", false);
 
 // Enables the display of the Mozilla VPN banner in private browsing windows
-pref("browser.privatebrowsing.vpnpromourl", "https://vpn.mozilla.org/?utm_source=firefox-browser&utm_medium=firefox-%CHANNEL%-browser&utm_campaign=private-browsing-vpn-link");
+pref("browser.privatebrowsing.vpnpromourl", "");
 
 // Whether the user has opted-in to recommended settings for data features.
 pref("browser.dataFeatureRecommendations.enabled", false);
@@ -1943,8 +1943,8 @@ pref("browser.ml.chat.prompts.2", '{"label":"Quiz Me","value":"Please quiz me on
 pref("browser.ml.chat.provider", "");
 pref("browser.ml.chat.sidebar", true);
 
-pref("security.protectionspopup.recordEventTelemetry", true);
-pref("security.app_menu.recordEventTelemetry", true);
+pref("security.protectionspopup.recordEventTelemetry", false);
+pref("security.app_menu.recordEventTelemetry", false);
 
 // Block insecure active content on https pages
 pref("security.mixed_content.block_active_content", true);
@@ -2007,8 +2007,8 @@ pref("identity.sendtabpromo.url", "https://support.mozilla.org/1/firefox/%VERSIO
 
 // URLs for promo links to mobile browsers. Note that consumers are expected to
 // append a value for utm_campaign.
-pref("identity.mobilepromo.android", "https://www.mozilla.org/firefox/android/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_campaign=");
-pref("identity.mobilepromo.ios", "https://www.mozilla.org/firefox/ios/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_campaign=");
+pref("identity.mobilepromo.android", "");
+pref("identity.mobilepromo.ios", "");
 
 // Migrate any existing Firefox Account data from the default profile to the
 // Developer Edition profile.
@@ -2081,21 +2081,21 @@ pref("browser.translations.select.enable", true);
 
 // Telemetry settings.
 // Determines if Telemetry pings can be archived locally.
-pref("toolkit.telemetry.archive.enabled", true);
+pref("toolkit.telemetry.archive.enabled", false);
 // Enables sending the shutdown ping when Firefox shuts down.
-pref("toolkit.telemetry.shutdownPingSender.enabled", true);
+pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 // Enables using the `pingsender` background task.
 pref("toolkit.telemetry.shutdownPingSender.backgroundtask.enabled", false);
 // Enables sending the shutdown ping using the pingsender from the first session.
 pref("toolkit.telemetry.shutdownPingSender.enabledFirstSession", false);
 // Enables sending a duplicate of the first shutdown ping from the first session.
-pref("toolkit.telemetry.firstShutdownPing.enabled", true);
+pref("toolkit.telemetry.firstShutdownPing.enabled", false);
 // Enables sending the 'new-profile' ping on new profiles.
-pref("toolkit.telemetry.newProfilePing.enabled", true);
+pref("toolkit.telemetry.newProfilePing.enabled", false);
 // Enables sending 'update' pings on Firefox updates.
-pref("toolkit.telemetry.updatePing.enabled", true);
+pref("toolkit.telemetry.updatePing.enabled", false);
 // Enables sending 'bhr' pings when the browser hangs.
-pref("toolkit.telemetry.bhrPing.enabled", true);
+pref("toolkit.telemetry.bhrPing.enabled", false);
 
 // Enable GMP support in the addon manager.
 pref("media.gmp-provider.enabled", true);
@@ -2224,7 +2224,7 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
 pref("browser.vpn_promo.disallowed_regions", "ae,by,cn,cu,iq,ir,kp,om,ru,sd,sy,tm,tr");
 
 // Default to enabling VPN promo messages to be shown when specified and allowed
-pref("browser.vpn_promo.enabled", true);
+pref("browser.vpn_promo.enabled", false);
 // Only show vpn card to certain regions. Comma separated string of two letter ISO 3166-1 country codes.
 // The most recent list of supported countries can be found at https://support.mozilla.org/en-US/kb/mozilla-vpn-countries-available-subscribe
 // The full list of supported country codes can also be found at https://github.com/mozilla/bedrock/search?q=VPN_COUNTRY_CODES
@@ -2257,10 +2257,10 @@ pref("browser.contentblocking.report.endpoint_url", "https://monitor.firefox.com
 pref("browser.contentblocking.report.proxy_extension.url", "https://fpn.firefox.com/browser?utm_source=firefox-desktop&utm_medium=referral&utm_campaign=about-protections&utm_content=about-protections");
 pref("browser.contentblocking.report.mobile-ios.url", "https://apps.apple.com/app/firefox-private-safe-browser/id989804926");
 pref("browser.contentblocking.report.mobile-android.url", "https://play.google.com/store/apps/details?id=org.mozilla.firefox&referrer=utm_source%3Dprotection_report%26utm_content%3Dmobile_promotion");
-pref("browser.contentblocking.report.vpn.url", "https://vpn.mozilla.org/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_campaign=about-protections-card");
-pref("browser.contentblocking.report.vpn-promo.url", "https://vpn.mozilla.org/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_campaign=about-protections-top-promo");
-pref("browser.contentblocking.report.vpn-android.url", "https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dfirefox-browser%26utm_medium%3Dfirefox-browser%26utm_campaign%3Dabout-protections-mobile-vpn%26anid%3D--");
-pref("browser.contentblocking.report.vpn-ios.url", "https://apps.apple.com/us/app/firefox-private-network-vpn/id1489407738");
+pref("browser.contentblocking.report.vpn.url", "");
+pref("browser.contentblocking.report.vpn-promo.url", "");
+pref("browser.contentblocking.report.vpn-android.url", "");
+pref("browser.contentblocking.report.vpn-ios.url", "");
 
 // Protection Report's SUMO urls
 pref("browser.contentblocking.report.lockwise.how_it_works.url", "https://support.mozilla.org/1/firefox/%VERSION%/%OS%/%LOCALE%/password-manager-report");
@@ -3086,7 +3086,7 @@ pref("cookiebanners.ui.desktop.cfrVariant", 0);
 
 // Trigger FOG's Artifact Build support on artifact builds.
 #ifdef MOZ_ARTIFACT_BUILDS
-  pref("telemetry.fog.artifact_build", true);
+  pref("telemetry.fog.artifact_build", false);
 #endif
 
 #ifdef NIGHTLY_BUILD
