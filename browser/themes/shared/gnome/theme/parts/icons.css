@@ -300,10 +300,10 @@ button.close::before {
 
 	/* Window buttons */
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox .titlebar-close .toolbarbutton-icon {
-		list-style-image: url("../icons/window-close-symbolic.svg") !important;
+		list-style-image: url("../icons/window-close-symbolic.svg?v=2") !important;
 	}
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox .titlebar-max .toolbarbutton-icon {
-		list-style-image: url("../icons/window-maximize-symbolic.svg") !important;
+		list-style-image: url("../icons/window-maximize-symbolic.svg?v=2") !important;
 	}
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox .titlebar-restore .toolbarbutton-icon {
 		list-style-image: url("../icons/window-restore-symbolic.svg") !important;
@@ -312,7 +312,7 @@ button.close::before {
 		list-style-image: url("../icons/view-restore-symbolic.svg") !important;
 	}
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox .titlebar-min .toolbarbutton-icon {
-		list-style-image: url("../icons/window-minimize-symbolic.svg") !important;
+		list-style-image: url("../icons/window-minimize-symbolic.svg?v=2") !important;
 	}
 	:root[tabsintitlebar][inFullscreen] #window-controls #restore-button .toolbarbutton-icon {
 		list-style-image: url("../icons/view-restore-symbolic.svg") !important;
@@ -560,14 +560,14 @@ button.close::before {
 	#identity-popup[connection^="secure"] .identity-popup-security-connection {
 		list-style-image: url("../icons/padlock-symbolic.svg") !important;
 	}
-	#identity-box[pageproxystate="valid"].notSecure #identity-icon,
+	/* #identity-box[pageproxystate="valid"].notSecure #identity-icon,
 	#identity-box[pageproxystate="valid"].mixedActiveContent #identity-icon,
 	#identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
 			list-style-image: url("../icons/padlock-insecure-symbolic.svg") !important;
 	}
 	.identity-popup-security-connection {
 		list-style-image: url("../icons/padlock-insecure-symbolic.svg") !important;
-	}
+	} */
 	#permissions-granted-icon {
 			list-style-image: url("../icons/general-properties-symbolic.svg") !important;
 	}
