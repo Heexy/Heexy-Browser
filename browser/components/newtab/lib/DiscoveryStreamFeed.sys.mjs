@@ -2314,7 +2314,7 @@ getHardcodedLayout = ({
               },
             ],
             privacyNoticeURL: {
-              url: "https://www.mozilla.org/privacy/firefox/#recommend-relevant-content",
+              url: "",
               title: {
                 id: "newtab-section-menu-privacy-notice",
               },
@@ -2334,7 +2334,7 @@ getHardcodedLayout = ({
               {
                 type: "PrivacyLink",
                 properties: {
-                  url: "https://www.mozilla.org/privacy/firefox/",
+                  url: "",
                   title: {
                     id: "newtab-section-menu-privacy-notice",
                   },

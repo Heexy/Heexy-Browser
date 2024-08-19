@@ -44,7 +44,7 @@ pref("extensions.getAddons.discovery.api_url", "https://services.addons.mozilla.
 pref("extensions.getAddons.browserMappings.url", "https://services.addons.mozilla.org/api/v5/addons/browser-mappings/?browser=%BROWSER%");
 
 // The URL for the privacy policy related to recommended extensions.
-pref("extensions.recommendations.privacyPolicyUrl", "https://www.mozilla.org/privacy/firefox/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_content=privacy-policy-link#addons");
+pref("extensions.recommendations.privacyPolicyUrl", "");
 // The URL for Firefox Color, recommended on the theme page in about:addons.
 pref("extensions.recommendations.themeRecommendationUrl", "https://color.firefox.com/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_content=theme-footer-link");
 
@@ -3157,3 +3157,18 @@ pref("toolkit.contentRelevancy.enabled", false);
 pref("toolkit.contentRelevancy.ingestEnabled", false);
 // Pref to enable extra logging for the content relevancy feature
 pref("toolkit.contentRelevancy.log", false);
+
+// Heexy UI Theme Settings Start
+// Enable customChrome.css
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+// Set UI density to normal
+user_pref("browser.uidensity", 0);
+// Enable SVG context-propertes
+user_pref("svg.context-properties.content.enabled", true);
+// Disable private window dark theme
+user_pref("browser.theme.dark-private-windows", false);
+// Enable rounded bottom window corners
+user_pref("widget.gtk.rounded-bottom-corners.enabled", true);
+// Tabs as Header as default Firefox tabs not under URL Bar
+user_pref("gnomeTheme.tabsAsHeaderbar", true);
+// Heexy UI Theme End

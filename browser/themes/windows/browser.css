@@ -5,6 +5,8 @@
 @import url("chrome://browser/skin/browser-shared.css");
 @import url("chrome://browser/skin/contextmenu.css");
 @import url("chrome://browser/skin/browser-custom-colors.css");
+@import url("chrome://browser/skin/gnome/userChrome.css");
+@import url("chrome://browser/skin/gnome/userContent.css");
 
 #menubar-items {
   flex-direction: column; /* for flex hack */
