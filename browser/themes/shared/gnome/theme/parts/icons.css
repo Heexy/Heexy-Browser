@@ -524,11 +524,11 @@ button.close::before {
 	#downloads-indicator-icon {
 		list-style-image: url("../icons/folder-download-symbolic.svg") !important;
 	}
-	/* Info */
+	/* Info 
 	.panel-info-button:not(.translations-panel-settings-gear-icon) > image,
 	#identity-icon {
 		list-style-image: url("../icons/info-symbolic.svg") !important;
-	}
+	} */
 	.tabbrowser-tab[image="chrome://global/skin/icons/info.svg"]:not([busy]):not([progress]) .tab-icon-stack::before {
 		content: "";
 		height: 16px;

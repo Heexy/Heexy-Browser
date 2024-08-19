@@ -3159,16 +3159,6 @@ pref("toolkit.contentRelevancy.ingestEnabled", false);
 pref("toolkit.contentRelevancy.log", false);
 
 // Heexy UI Theme Settings Start
-// Enable customChrome.css
-user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-// Set UI density to normal
-user_pref("browser.uidensity", 0);
-// Enable SVG context-propertes
-user_pref("svg.context-properties.content.enabled", true);
-// Disable private window dark theme
-user_pref("browser.theme.dark-private-windows", false);
-// Enable rounded bottom window corners
-user_pref("widget.gtk.rounded-bottom-corners.enabled", true);
-// Tabs as Header as default Firefox tabs not under URL Bar
-user_pref("gnomeTheme.tabsAsHeaderbar", true);
+pref("gnomeTheme.tabsAsHeaderbar", true);
+pref("gnomeTheme.normalWidthTabs", true);
 // Heexy UI Theme End
