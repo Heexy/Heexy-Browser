@@ -98,7 +98,7 @@
 /* Window buttons box */
 :root[tabsintitlebar] #titlebar .titlebar-buttonbox-container {
 	appearance: none !important;
-	padding: 5px;
+	padding: 1px; /* Default 5px */
 	position: absolute !important;	
 	right: 0;
 	top: 0;
@@ -111,12 +111,12 @@
 /* Window buttons style */
 :root[tabsintitlebar]:not([inFullscreen]) #titlebar .titlebar-button {
 	padding: 0 2px !important;
-	background: var(--gnome-button-background) !important;
+	/* background: var(--gnome-button-background) !important; */
 	transition: background 0.3s;
 }
 
 :root[tabsintitlebar] #titlebar .titlebar-button {
-	border-radius: 100% !important;
+	border-radius: 6px !important;
 	height: 24px !important;
 	width: 24px !important;
 	margin: 6px 6px !important;

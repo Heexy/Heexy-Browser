@@ -339,3 +339,7 @@
   skin/classic/browser/gnome/theme/icons/preferences-system-time-symbolic.svg (../shared/gnome/theme/icons/preferences-system-time-symbolic.svg)
   skin/classic/browser/gnome/theme/icons/settings-symbolic.svg (../shared/gnome/theme/icons/settings-symbolic.svg)
   skin/classic/browser/gnome/theme/icons/process-stop-symbolic.svg (../shared/gnome/theme/icons/process-stop-symbolic.svg)
+  skin/classic/browser/gnome/theme/icons/pip-in-symbolic.svg (../shared/gnome/theme/icons/pip-in-symbolic.svg)
+  skin/classic/browser/gnome/theme/icons/audio-playing-symbolic.svg (../shared/gnome/theme/icons/audio-playing-symbolic.svg)
+  skin/classic/browser/gnome/theme/icons/pip-out-symbolic.svg (../shared/gnome/theme/icons/pip-out-symbolic.svg)
+  skin/classic/browser/gnome/theme/icons/audio-muted-symbolic.svg (../shared/gnome/theme/icons/audio-muted-symbolic.svg)

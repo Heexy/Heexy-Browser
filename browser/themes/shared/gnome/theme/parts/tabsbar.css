@@ -215,7 +215,7 @@ tab {
 
 /* Center all inside tab */
 .tab-content {
-	justify-content: center !important;
+	justify-content: flex-end !important;
 	align-items: center !important;
 	margin-top: -1px;
 }
@@ -640,6 +640,8 @@ tab {
 	}
 	#TabsToolbar .toolbarbutton-1:not(#hack), #TabsToolbar .titlebar-button:not(#hack) {
 		margin-bottom: 0 !important;
+		width: 30px !important; /* ADDED */
+		height: 30px !important; /* ADDED */
 	}
 
 	/* Remove nav-bar rounding and padding */
@@ -656,9 +658,10 @@ tab {
 	:root[tabsintitlebar][sizemode="normal"]:not([gtktiledwindow="true"]) #TabsToolbar {
 		border-radius: env(-moz-gtk-csd-titlebar-radius) env(-moz-gtk-csd-titlebar-radius) 0 0 !important
 	}
-	:root[tabsintitlebar]:not([inFullscreen], [sizemode="maximized"]) #TabsToolbar .toolbar-items {
+	/* DISABLED BEACUSE BUGING TABS IF YOU MINIMIZE WINDOW */
+	/* :root[tabsintitlebar]:not([inFullscreen], [sizemode="maximized"]) #TabsToolbar .toolbar-items {
 		padding: 0 46px;
-	}
+	} */
 	
 	/* Hide duplicate window controls from menubar */
 	:root[tabsintitlebar] #toolbar-menubar .titlebar-buttonbox-container {
