@@ -216,7 +216,7 @@ tab {
 /* Center all inside tab */
 .tab-content {
 	justify-content: flex-end !important;
-	align-items: center !important;
+	align-items: flex-end !important;
 	margin-top: -1px;
 }
 .tab-content:not([pinned]) {
@@ -237,10 +237,10 @@ tab {
 }
 
 /* Center tab content */
-.tab-label-container {
+/* .tab-label-container {
 	min-width: 0 !important;
 	max-width: min-content !important;
-}
+} */
 .tabbrowser-tab:not([pinned]) .tab-label-container {
 	margin-right: -16px;
 }
