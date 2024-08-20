@@ -1,5 +1,6 @@
 <div align="center">
-<img src="https://cdn.heexy.org/images/logo.png" height="180" width="180">
+<img src="https://avatars.githubusercontent.com/u/87997093" height="180" width="180">
+
 # Heexy Browser
 
 Heexy browser is a minimalist, secure, and fast browser based on Firefox.
