@@ -54,6 +54,11 @@ When finished, you can run the code:
 ./mach run
 ```
 
+# Remove build cache command:
+```bash
+./mach clobber
+```
+
 # Important notes!
 After a change in the code, you must always run this command,
 **./mach build** without this, the changes will not take effect.
