@@ -1,0 +1,12 @@
+{
+  "name": "Heexy",
+  "version": "1.0",
+  "description": "Heexy search",
+  "permissions": ["search"],
+  "search_plugins": {
+    "mysearch": {
+      "path": "search_plugin/search.xml",
+      "os": "all"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Heexy</ShortName>
+  <Description>Heexy search</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16">icon.png</Image>
+  <Url type="text/html" method="GET" template="https://heexy.org/search?q={searchTerms}"/>
+  <SearchForm>https://heexy.org/search?)</SearchForm>
+  <SuggestionsUrl>https://heexy.org/search?q={searchTerms}</SuggestionsUrl>
+</SearchPlugin>

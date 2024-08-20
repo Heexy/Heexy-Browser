@@ -19,6 +19,8 @@
   #endif
 #endif
 
+
+pref("browser.search.defaultenginename", "heexy");
 pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
 
 // Set add-ons abuse report related prefs specific to Firefox Desktop.
@@ -423,7 +425,7 @@ pref("browser.urlbar.suggest.remotetab",            true);
 pref("browser.urlbar.suggest.searches",             true);
 pref("browser.urlbar.suggest.topsites",             true);
 pref("browser.urlbar.suggest.engines",              true);
-pref("browser.urlbar.suggest.calculator",           false);
+pref("browser.urlbar.suggest.calculator",           true); // enables seeing calc results instantly like operagx does
 pref("browser.urlbar.suggest.recentsearches",       true);
 
 pref("browser.urlbar.scotchBonnet.enableOverride", false);

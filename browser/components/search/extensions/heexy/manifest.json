@@ -1,0 +1,20 @@
+{
+  "name": "Heexy",
+  "version": "1.0",
+  "description": "Heexy search",
+  "permissions": ["search"],
+  "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "heexy@example.com"
+    }
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Heexy",
+      "search_url": "https://heexy.org/search?q={searchTerms}&p=1",
+      "favicon_url": "https://heexy.org/favicon.ico",
+      "is_default": true
+    }
+  }
+}
