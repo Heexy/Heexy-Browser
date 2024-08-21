@@ -347,7 +347,7 @@ button.close::before {
 	}
 	/* Back button */	
 	#nav-bar #back-button,
-	#context-back { 
+	#context-back {
 		list-style-image: url("../icons/go-previous-symbolic.svg") !important;
 	}
 	/* Forward button */	
