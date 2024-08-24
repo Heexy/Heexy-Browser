@@ -19,6 +19,7 @@
   #endif
 #endif
 
+#include heexy-user.js
 
 pref("browser.search.defaultenginename", "heexy");
 pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");

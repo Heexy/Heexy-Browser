@@ -6,6 +6,7 @@
 
 DIRS += [
     "formautofill",
+    "heexy",
     "screenshots",
     "webcompat",
     "report-site-issue",
