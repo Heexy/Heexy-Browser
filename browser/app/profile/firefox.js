@@ -20,7 +20,9 @@
 #endif
 
 #include heexy-user.js
-
+/** COOKIE BANNER HANDLING ***/
+//pref("cookiebanners.service.mode", 1);
+//pref("cookiebanners.service.mode.privateBrowsing", 1);
 pref("browser.search.defaultenginename", "heexy");
 pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
 

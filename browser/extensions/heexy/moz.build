@@ -1,0 +1,10 @@
+#wont build without this file
+
+with Files("**"):
+    BUG_COMPONENT = ("WebExtensions", "General") # this is probably important, I don't really know
+
+# somehow include manifest.json to be built??? - idk firefox docs suck ass
+# referenced form pictureinpicture cuz no docs
+FINAL_TARGET_FILES.features["heexy@example.com"] += ["manifest.json"] # placeholder id - don't care enough to get a real one
+
+

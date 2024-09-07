@@ -12,4 +12,10 @@ DIRS += [
     "report-site-issue",
     "pictureinpicture",
     "search-detection",
+    "uBlock"
+]
+
+FINAL_TARGET_FILES.features += [
+    'heexy@example.com.xpi',
+    "uBlock0@raymondhill.net.xpi"
 ]

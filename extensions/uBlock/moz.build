@@ -1,0 +1,4 @@
+#wont build without this file
+
+with Files("**"):
+    BUG_COMPONENT = ("WebExtensions", "General")
