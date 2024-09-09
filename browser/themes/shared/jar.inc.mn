@@ -286,6 +286,7 @@
   skin/classic/browser/weather/night-mostly-cloudy-with-flurries.svg (../shared/weather/night-mostly-cloudy-with-flurries.svg)
 
   skin/classic/browser/gnome/userChrome.css (../shared/gnome/userChrome.css)
+  skin/classic/browser/gnome/userContent.css (../shared/gnome/userContent.css)
   skin/classic/browser/gnome/theme/colors/light.css (../shared/gnome/theme/colors/light.css)
   skin/classic/browser/gnome/theme/colors/dark.css (../shared/gnome/theme/colors/dark.css)
   skin/classic/browser/gnome/theme/pages/newtab.css (../shared/gnome/theme/pages/newtab.css)
