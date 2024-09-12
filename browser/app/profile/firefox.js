@@ -1777,9 +1777,9 @@ pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "{\"id\":\"cfr
 pref("browser.newtabpage.activity-stream.asrouter.providers.messaging-experiments", "{\"id\":\"messaging-experiments\",\"enabled\":true,\"type\":\"remote-experiments\",\"updateCycleInMs\":3600000}");
 
 // ASRouter user prefs
-pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", true);
-pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", true);
-pref("messaging-system.askForFeedback", true);
+pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+pref("messaging-system.askForFeedback", false);
 
 // The pref that controls if ASRouter uses the remote fluent files.
 // It's enabled by default, but could be disabled to force ASRouter to use the local files.
@@ -2258,10 +2258,10 @@ pref("browser.contentblocking.report.monitor.sign_in_url", "https://monitor.fire
 pref("browser.contentblocking.report.monitor.preferences_url", "https://monitor.firefox.com/user/preferences");
 pref("browser.contentblocking.report.monitor.home_page_url", "https://monitor.firefox.com/user/dashboard");
 pref("browser.contentblocking.report.manage_devices.url", "https://accounts.firefox.com/settings/clients");
-pref("browser.contentblocking.report.endpoint_url", "https://monitor.firefox.com/user/breach-stats?includeResolved=true");
-pref("browser.contentblocking.report.proxy_extension.url", "https://fpn.firefox.com/browser?utm_source=firefox-desktop&utm_medium=referral&utm_campaign=about-protections&utm_content=about-protections");
-pref("browser.contentblocking.report.mobile-ios.url", "https://apps.apple.com/app/firefox-private-safe-browser/id989804926");
-pref("browser.contentblocking.report.mobile-android.url", "https://play.google.com/store/apps/details?id=org.mozilla.firefox&referrer=utm_source%3Dprotection_report%26utm_content%3Dmobile_promotion");
+pref("browser.contentblocking.report.endpoint_url", "");
+pref("browser.contentblocking.report.proxy_extension.url", "");
+pref("browser.contentblocking.report.mobile-ios.url", "");
+pref("browser.contentblocking.report.mobile-android.url", "");
 pref("browser.contentblocking.report.vpn.url", "");
 pref("browser.contentblocking.report.vpn-promo.url", "");
 pref("browser.contentblocking.report.vpn-android.url", "");
@@ -2457,9 +2457,9 @@ pref("signon.management.page.fileImport.enabled", true);
 // "offered"        - we have offered feature to user and they have not yet made a decision.
 // "enabled"        - user opted in to the feature.
 // "disabled"       - user opted out of the feature.
-pref("signon.firefoxRelay.feature", "available");
-pref("signon.management.page.breach-alerts.enabled", true);
-pref("signon.management.page.vulnerable-passwords.enabled", true);
+pref("signon.firefoxRelay.feature", "disabled");
+pref("signon.management.page.breach-alerts.enabled", false);
+pref("signon.management.page.vulnerable-passwords.enabled", false);
 pref("signon.management.page.sort", "name");
 // The utm_creative value is appended within the code (specific to the location on
 // where it is clicked). Be sure that if these two prefs are updated, that
