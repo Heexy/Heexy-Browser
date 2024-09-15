@@ -63,27 +63,47 @@ pref("browser.search.defaultenginename", "Heexy");
 ****************************************************************************/
 /** TRACKING PROTECTION ***/
 pref("browser.contentblocking.category", "strict");
-pref("urlclassifier.trackingSkipURLs", "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com");
+pref("urlclassifier.trackingSkipURLs", "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com"); // allow embedded tweets, Instagram and Reddit posts, and TikTok embeds
 pref("urlclassifier.features.socialtracking.skipURLs", "*.instagram.com, *.twitter.com, *.twimg.com");
 pref("network.cookie.sameSite.noneRequiresSecure", true);
-pref("browser.download.start_downloads_in_tmp_dir", true);
-pref("browser.helperApps.deleteTempFileOnExit", true);
-pref("browser.uitour.enabled", false);
+pref("browser.download.start_downloads_in_tmp_dir", true); // less cache
+pref("browser.helperApps.deleteTempFileOnExit", true); // less cache
+pref("browser.uitour.enabled", false); // disable uitour backend
+pref("browser.uitour.url", ""); // WILL cause console errors - better safety
 pref("privacy.globalprivacycontrol.enabled", true);
+pref("security.sandbox.gpu.level", 1); // DISABLE IF BUILDING A LINUX BUILD
+pref("privacy.partition.bloburl_per_partition_key", true); // making network partitioning better
+pref("privacy.bounceTrackingProtection.enabled", true); // bounce tracker protection
+pref("privacy.bounceTrackingProtection.enableDryRunMode", false); // false enables tracker data purging
+pref("browser.send_pings", false);
+pref("dom.battery.enabled", false); // disable permission for websites to get devices current battery level
+pref("devtools.debugger.remote-enabled", false); // disable remote debugging
+pref("privacy.globalprivacycontrol.enabled", true); // make a request to visited site, that the user doesn't want any of his data sold and/or gathered. Respected by many sites
+pref("privacy.globalprivacycontrol.functionality.enabled", true);
+pref("privacy.globalprivacycontrol.pbmode.enabled", true);
+
 
 /** OCSP & CERTS / HPKP ***/
+// disable oscp -- explanation by yokoffing in betterfox.js/securefox: OCSP leaks your IP and domains you visit to the CA when OCSP Stapling is not available on visited host.
+// OCSP is vulnerable to replay attacks when nonce is not configured on the OCSP responder.
 pref("security.OCSP.enabled", 0);
 pref("security.remote_settings.crlite_filters.enabled", true);
 pref("security.pki.crlite_mode", 2);
+pref("security.cert_pinning.enforcement_level", 1); // allow user's mitm(antivirus) to verify certificates
 
 /** SSL / TLS ***/
 pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 pref("browser.xul.error_pages.expert_bad_cert", true);
 pref("security.tls.enable_0rtt_data", false);
 
+// FPP (WiP)
+pref("privacy.resistFingerprinting.randomization.daily_reset.enabled", true); // enable fpp
+pref("privacy.resistFingerprinting.randomization.daily_reset.private.enabled", true); // enable fpp in incognito
+
 /** DISK AVOIDANCE ***/
-pref("browser.privatebrowsing.forceMediaMemoryCache", true);
-pref("browser.sessionstore.interval", 60000);
+pref("browser.privatebrowsing.forceMediaMemoryCache", true); //prevent media cache from writing to disk in Private Browsing
+pref("browser.sessionstore.interval", 60000); // save the current state of the session every minute
+pref("browser.pagethumbnails.capturing_disabled", true); // disable capturing thumbnails
 
 /** SHUTDOWN & SANITIZING ***/
 pref("privacy.history.custom", true);
@@ -93,8 +113,8 @@ pref("browser.urlbar.trimHttps", true);
 pref("browser.urlbar.untrimOnUserInteraction.featureGate", true);
 pref("browser.search.separatePrivateDefault.ui.enabled", true);
 pref("browser.urlbar.update2.engineAliasRefresh", true);
-pref("browser.search.suggest.enabled", false);
-pref("browser.urlbar.quicksuggest.enabled", false);
+pref("browser.search.suggest.enabled", true);
+pref("browser.urlbar.quicksuggest.enabled", true);
 pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
 pref("browser.urlbar.groupLabels.enabled", false);
@@ -106,16 +126,25 @@ pref("network.IDN_show_punycode", true);
 /** HTTPS-FIRST POLICY ***/
 pref("dom.security.https_first", true);
 
-/** PASSWORDS ***/
+/** PASSWORDS + FORMS***/
 pref("signon.formlessCapture.enabled", false);
 pref("signon.privateBrowsingCapture.enabled", false);
 pref("network.auth.subresource-http-auth-allow", 1);
 pref("editor.truncate_user_pastes", false);
+pref("layout.forms.reveal-password-button.enabled", true); // enable always shown password reveal button
+pref("signon.rememberSignons", false);
+pref("signon.rememberSignons.visibilityToggle", true); // DEFAULT
+pref("signon.schemeUpgrades", true); // DEFAULT
+pref("signon.showAutoCompleteFooter", true); // DEFAULT
+pref("signon.autologin.proxy", false); // DEFAULT
+pref("extensions.formautofill.creditCards.enabled", false); // don't store credit card information locally
+pref("extensions.formautofill.addresses.enabled", false); // don't store address information locally
 
 /** MIXED CONTENT + CROSS-SITE ***/
 pref("security.mixed_content.block_display_content", true);
 pref("pdfjs.enableScripting", false);
 pref("extensions.postDownloadThirdPartyPrompt", false);
+
 
 /** HEADERS / REFERERS ***/
 pref("network.http.referer.XOriginTrimmingPolicy", 2);
@@ -153,6 +182,15 @@ pref("toolkit.coverage.opt-out", true);
 pref("toolkit.coverage.endpoint.base", "");
 pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 pref("browser.newtabpage.activity-stream.telemetry", false);
+pref("dom.security.unexpected_system_load_telemetry_enabled", false);
+pref("messaging-system.rsexperimentloader.enabled", false);
+pref("network.trr.confirmation_telemetry_enabled", false);
+pref("security.app_menu.recordEventTelemetry", false);
+pref("security.certerrors.mitm.priming.enabled", false);
+pref("security.certerrors.recordEventTelemetry", false);
+pref("security.protectionspopup.recordEventTelemetry", false);
+pref("signon.recipes.remoteRecipes.enabled", false);
+pref("privacy.trackingprotection.emailtracking.data_collection.enabled", false);
 
 /** EXPERIMENTS ***/
 pref("app.shield.optoutstudies.enabled", false);
@@ -174,29 +212,27 @@ pref("network.connectivity-service.enabled", false);
 ****************************************************************************/
 /** MOZILLA UI ***/
 pref("browser.privatebrowsing.vpnpromourl", "");
-pref("extensions.getAddons.showPane", false);
-pref("extensions.htmlaboutaddons.recommendations.enabled", false);
-pref("browser.discovery.enabled", false);
-pref("browser.shell.checkDefaultBrowser", false);
-pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
-pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
-pref("browser.preferences.moreFromMozilla", false);
-pref("browser.aboutConfig.showWarning", false);
-pref("browser.aboutwelcome.enabled", false);
-pref("browser.tabs.tabmanager.enabled", false);
-pref("browser.profiles.enabled", true);
+pref("extensions.getAddons.showPane", false); // disables recommended addons, which means no google analytics usage
+pref("extensions.htmlaboutaddons.recommendations.enabled", false); //disables recommended addons in about:addons, which means no google analytics usage
+pref("browser.discovery.enabled", false); // Personalized Extension Recommendations in about:addons and AMO
+pref("browser.shell.checkDefaultBrowser", false); // disables the "set hxy_browser as your default browser" thingy
+pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false); // disables contextual feature recommendations in addons
+pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false); // disables contextual feature recommendations in features?
+pref("browser.preferences.moreFromMozilla", false); // hides "more from Mozilla" text in settings
+pref("browser.aboutConfig.showWarning", false); // removes the annoying warning in about:config
+pref("browser.aboutwelcome.enabled", true); // enables welcome page(about:welcome)
+pref("browser.tabs.tabmanager.enabled", false); // better tab organization with more tabs
+pref("browser.profiles.enabled", true); // new profile switcher -- idk what that means
 
 /** THEME ADJUSTMENTS ***/
-pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-pref("browser.compactmode.show", true);
-pref("browser.display.focus_ring_on_anything", true);
-pref("browser.display.focus_ring_style", 0);
-pref("browser.display.focus_ring_width", 0);
-pref("layout.css.prefers-color-scheme.content-override", 2);
-pref("browser.privateWindowSeparation.enabled", false); // WINDOWS
-pref("browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled", true);
+pref("toolkit.legacyUserProfileCustomizations.stylesheets", true); // enable Firefox to use userChome, userContent, etc.
+pref("browser.compactmode.show", true);  // adds compact mode back
+pref("layout.css.prefers-color-scheme.content-override", 2); // make the preferred theme for websites "dark"
+pref("browser.privateWindowSeparation.enabled", true); // WINDOWS -- seems to have no effect
+pref("browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled", true); // new tab wallpapers
 
 /** COOKIE BANNER HANDLING ***/
+// if possible reject cookie banners. If not keep them on screen
 pref("cookiebanners.service.mode", 1);
 pref("cookiebanners.service.mode.privateBrowsing", 1);
 
@@ -292,3 +328,7 @@ pref("mousewheel.default.delta_multiplier_y", 280);
 ****************************************************************************/
 
 // pref("browser.urlbar.update2.engineAliasRefresh"
+pref("browser.tabs.hoverPreview.showThumbnails", false)
+
+//********************************************************************************
+
