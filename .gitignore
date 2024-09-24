@@ -57,7 +57,8 @@ ID
 /.clang_complete
 /machrc
 /.machrc
-
+/plinK.buildconfig
+/plinK_data/first_start.plink
 # pyenv artifact
 /.python-version
 
