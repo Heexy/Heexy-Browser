@@ -2,7 +2,7 @@
 ---
 
 # plinK - Firefox Build Tool Extension
-
+By Heexy
 ## Table of Contents
 1. [Getting Things Set Up](#1-getting-things-set-up)
 2. [Modifying Your Browser Profile](#2-modifying-your-browser-profile)
