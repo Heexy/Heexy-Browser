@@ -11,9 +11,12 @@
   },
   "chrome_settings_overrides": {
     "search_provider": {
+      "keyword": "@heexy",
       "name": "Heexy",
       "search_url": "https://heexy.org/search?q={searchTerms}&p=1",
       "favicon_url": "https://heexy.org/favicon.ico",
+      "suggest_url": "https://heexy.org/autocomplete",
+      "suggest_url_get_params": "q={searchTerms}",
       "is_default": true
     }
   }
