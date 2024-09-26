@@ -1,19 +1,19 @@
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/87997093" height="180" width="180">
 
-# Heexy Browser
+# ✨ Heexy Browser
 
 Heexy browser is a minimalist, secure, and fast browser based on Firefox.
 
 </div>
 
-## Installation
+## 👷🏼 Installation
 
 - [Windows](./WINDOWS.md)
 - [MacOS]()
 - [Linux]()
 
-## Heexy PlinK
+## 🐱 Heexy PlinK
 - [Documentation](https://github.com/Heexy/heexy-browser/blob/release/plink.md)
 
 ## 🔥 Credits
