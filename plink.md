@@ -1,8 +1,9 @@
 
 ---
 
-# plinK - Firefox Build Tool Extension
+# 🐱 plinK - Firefox Build Tool Extension
 By Heexy
+
 ## Table of Contents
 1. [Getting Things Set Up](#1-getting-things-set-up)
 2. [Modifying Your Browser Profile](#2-modifying-your-browser-profile)
@@ -16,13 +17,13 @@ By Heexy
 
 ## 1. Getting Things Set Up
 
-### Requirements:
+### 💪 Requirements:
 - **plinK** currently only supports **Windows** (NT-based systems).
 - A terminal with a modern rendering engine, that supports dynamic redraw. (Most IDE terminals won't work. Terminals with AtlasEngine might sometimes see blue text as pink)
 - Ensure that the Firefox source code and the **mach** build tool are available in your working directory.
 - Ensure, that you have python and the proper packages installed (automatic package installer coming soon)
 
-### First Run Instructions:
+### 🚀 First Run Instructions:
 1. Clone the Heexy browser source code to your system. (Ideally onto a dev drive.)
 2. Run `./mach bootstrap` and select the second option
 3. After it finishes open a terminal of your choice in the newly cloned Heexy browser source directory and run `python plink.py`
@@ -92,7 +93,7 @@ You can build your Heexy browser profile with preserved data using the following
 profile build
 ```
 
-### Profile Data Preservation:
+### ✨ Profile Data Preservation:
 - Bookmarks, extensions, and specific folders can be copied over from the `obj-x86_64-pc-windows-msvc/tmp/profile-default` directory to the `plinK_data/profile` folder.
   
 - **Profile options** can be configured in `plinK.buildconfig` for:
@@ -120,21 +121,21 @@ This command will:
 
 ## 6. Other Commands
 
-### Clearing the Cache:
+### ♻️ Clearing the Cache:
 To clear Firefox’s build cache, use the command:
 
 ```bash
 clear cache
 ```
 
-### Pushing Profile to Run Directory:
+### 📣 Pushing Profile to Run Directory:
 You can manually push the profile into the Firefox run directory using:
 
 ```bash
 profile push
 ```
 
-### Redrawing UI:
+### 🎨 Redrawing UI:
 If you encounter any issues with the UI, you can refresh it with:
 
 ```bash
@@ -142,7 +143,7 @@ rd
 ```
 ([Mach may sometimes brick the UI](#7-known-issues) for the entire length of a build, it is recommended to run this command after mach finished building (Make sure to delete the build command from the input before inputting this command))
 
-### Viewing Logs:
+### 📜 Viewing Logs:
 Some terminal renderers block scrolling when the user input widget is focused.
 To unfocus the user input widget use:
 
@@ -150,13 +151,13 @@ To unfocus the user input widget use:
 logs
 ```
 
-### Syncing prefs.js and user.js:
+### 🔄 Syncing prefs.js and user.js:
 To sync config files with a built profile you can use this command in the plonKsole:
 ```bash
 profile sync pref
 ```
 
-### Closing plinK:
+### ❌ Closing plinK:
 To close plinK run this command in the plonKsole:
 ```bash
 close
@@ -171,6 +172,10 @@ and then press `ctrl+c` to close plinK
 - Long Mach builds breaking rendering (invalid ascii color codes) on certain terminals
 ---
 
+## 👀 License
+PlinK is licensed as [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+## 📌 Note
 This documentation outlines the key commands and processes for using plinK. For any additional help, refer to the in-app log messages or contact Heexy devs.
 
 ---
