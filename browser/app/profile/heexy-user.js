@@ -328,7 +328,7 @@ pref("mousewheel.default.delta_multiplier_y", 280);
 ****************************************************************************/
 
 // pref("browser.urlbar.update2.engineAliasRefresh"
-pref("browser.tabs.hoverPreview.showThumbnails", false)
+pref("browser.tabs.hoverPreview.showThumbnails", false);
 
 //********************************************************************************
 
