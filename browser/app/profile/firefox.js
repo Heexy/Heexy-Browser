@@ -1444,14 +1444,13 @@ pref("toolkit.datacollection.infoURL",
      "https://www.mozilla.org/legal/privacy/firefox.html");
 
 // URL for "Learn More" for Crash Reporter
-pref("toolkit.crashreporter.infoURL",
-     "");
+pref("toolkit.crashreporter.infoURL","");
 
 // base URL for web-based support pages
-pref("app.support.baseURL", "");
+pref("app.support.baseURL", "https://www.mozilla.org/");
 
 // base url for web-based feedback pages
-pref("app.feedback.baseURL", "");
+pref("app.feedback.baseURL", "https://www.mozilla.org/");
 
 pref("security.certerrors.recordEventTelemetry", true);
 pref("security.certerrors.permanentOverride", true);
