@@ -18,7 +18,7 @@
   --in-content-text-color: var(--in-content-page-color);
   --in-content-box-background: var(--background-color-box);
   --in-content-box-background-odd: rgba(12, 12, 13, 0.05); /* grey 90 a05 */
-  --in-content-box-border-color: color-mix(in srgb, currentColor 41%, transparent);
+  --in-content-box-border-color: color-mix(in srgb, currentColor 10%, transparent);
   --in-content-box-info-background: #f0f0f4;
   --in-content-item-hover: color-mix(in srgb, var(--in-content-primary-button-background) 20%, transparent);
   --in-content-item-hover-text: var(--in-content-page-color);
@@ -760,6 +760,7 @@ html|*#categories {
   margin-inline-start: 34px;
   padding-inline: 10px;
   transition: background-color 150ms;
+  border-radius: 0.6rem;
 }
 
 html|*#categories > html|*.category {

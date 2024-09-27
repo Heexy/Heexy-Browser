@@ -94,6 +94,7 @@ menulist,
 html|select {
   /* override the root rule */
   user-select: none;
+  border-radius: 0.4rem;
 }
 
 /* Buttons get a default min-width in XUL. When they also have flex, they will
@@ -162,6 +163,7 @@ radio {
 .accessory-button {
   min-width: 150px;
   margin: 4px 0;
+  border-radius: 0.4rem;
 }
 
 .spotlight {
@@ -206,6 +208,7 @@ radio {
   overflow: visible;
   min-height: auto;
   padding: 1px; /* Adding padding around richlistitem in order to make entire keyboard focusing outline visible */
+  gap: 0.5rem;
 }
 
 #category-general > .category-icon {
@@ -965,8 +968,10 @@ dialog > .sync-engines-list + hbox {
 
 #policies-container,
 #searchInput {
-  min-height: 32px;
   margin: 20px 0 30px;
+  width: -moz-available !important;
+  border-radius: 0.7rem;
+  height: 2.5rem;
 }
 
 #policies-container {
@@ -1123,6 +1128,7 @@ menulist[indicator=true] > menupopup menuitem[indicator=true]:not([image]) > .me
 #primaryBrowserLocale {
   margin-inline-start: 0;
   min-width: 20em;
+  border-radius: 0.4rem;
 }
 
 #availableLanguages,
@@ -1172,7 +1178,9 @@ menulist[indicator=true] > menupopup menuitem[indicator=true]:not([image]) > .me
 }
 
 .updateSettingCrossUserWarningContainer {
-  margin-block-end: 17px;
+  margin-block-start: 17px;
+  border-radius: 0.8rem;
+  padding: 1rem;
 }
 
 #updateSettingCrossUserWarningDesc {
