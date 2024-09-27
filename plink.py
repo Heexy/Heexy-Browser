@@ -420,6 +420,10 @@ preserve_folders: []""")
                 input_box.refresh()
                 await self.activate_input()
                 self.log_handler.log("Input redrawn")
+            elif user_input.startswith("mach"):
+                cmd_by_usr_input = user_input.split(" ")[:1]
+                task = self.run_mach("".join(cmd_by_usr_input))
+                await task
             elif user_input == "close" or user_input == "quit":
                 return 0
             else:

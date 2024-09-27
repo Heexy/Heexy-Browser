@@ -1258,9 +1258,9 @@ pref("accessibility.typeaheadfind.flashBar", 1);
 // Whether we can show the "Firefox Labs" section.
 pref("browser.preferences.experimental", true);
 
-#else
+
 pref("browser.preferences.experimental", false);
-#endif
+
 pref("browser.preferences.moreFromMozilla", false);
 
 pref("browser.preferences.experimental.hidden", false);
