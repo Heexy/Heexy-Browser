@@ -101,6 +101,10 @@
   color-scheme: light dark;
 }
 
+#helpButton {
+  display: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :host(:is(.anonymous-content-host, notification-message)),
   :root {
@@ -129,7 +133,7 @@
     --in-content-icon-color: rgb(251,251,254);
 
     --in-content-primary-button-text-color: rgb(43,42,51);
-    --in-content-primary-button-background: rgb(0,221,255);
+    --in-content-primary-button-background: rgb(77, 188, 255);
     --in-content-primary-button-background-hover: rgb(128,235,255);
     --in-content-primary-button-background-active: rgb(170,242,255);
 
@@ -738,6 +742,7 @@ xul|label[disabled="true"] {
   border-width: 0;
   width: var(--in-content-sidebar-width);
   outline: none;
+  gap: 0.5rem;
 }
 
 @media print {

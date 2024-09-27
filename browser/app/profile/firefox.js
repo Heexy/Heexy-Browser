@@ -1261,8 +1261,6 @@ pref("browser.preferences.experimental", true);
 
 pref("browser.preferences.experimental", false);
 
-pref("browser.preferences.moreFromMozilla", false);
-
 pref("browser.preferences.experimental.hidden", false);
 // Whether we show the "More from Mozilla" section.
 pref("browser.preferences.moreFromMozilla", true);
