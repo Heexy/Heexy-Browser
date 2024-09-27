@@ -1256,14 +1256,10 @@ pref("accessibility.typeaheadfind.linksonly", false);
 pref("accessibility.typeaheadfind.flashBar", 1);
 
 // Whether we can show the "Firefox Labs" section.
-pref("browser.preferences.experimental", true);
-
-
 pref("browser.preferences.experimental", false);
-
 pref("browser.preferences.experimental.hidden", false);
 // Whether we show the "More from Mozilla" section.
-pref("browser.preferences.moreFromMozilla", true);
+pref("browser.preferences.moreFromMozilla", false);
 
 // Used by settings to track whether the user customized advanced
 // performance settings. Not used directly elsewhere.
@@ -2302,7 +2298,7 @@ pref("browser.contentblocking.report.hide_vpn_banner", false);
 pref("browser.contentblocking.report.vpn_sub_id", "sub_HrfCZF7VPHzZkA");
 
 pref("browser.contentblocking.report.monitor.url", "https://monitor.firefox.com/?entrypoint=protection_report_monitor&utm_source=about-protections");
-pref("browser.contentblocking.report.monitor.how_it_works.url", "https://monitor.firefox.com/about");
+pref("browser.contentblocking.report.monitor.how_it_works.url", "");
 pref("browser.contentblocking.report.monitor.sign_in_url", "https://monitor.firefox.com/oauth/init?entrypoint=protection_report_monitor&utm_source=about-protections&email=");
 pref("browser.contentblocking.report.monitor.preferences_url", "https://monitor.firefox.com/user/preferences");
 pref("browser.contentblocking.report.monitor.home_page_url", "https://monitor.firefox.com/user/dashboard");
@@ -2515,9 +2511,9 @@ pref("signon.management.page.sort", "name");
 // the utm_creative param be last.
 pref("signon.management.page.breachAlertUrl",
      "https://monitor.firefox.com/breach-details/");
-pref("signon.passwordEditCapture.enabled", true);
+pref("signon.passwordEditCapture.enabled", false);
 pref("signon.relatedRealms.enabled", false);
-pref("signon.showAutoCompleteFooter", true);
+pref("signon.showAutoCompleteFooter", false);
 pref("signon.showAutoCompleteImport", "import");
 pref("signon.suggestImportCount", 3);
 

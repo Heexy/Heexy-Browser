@@ -20,43 +20,43 @@ pref("browser.search.defaultenginename", "Heexy");
  * SECTION: FASTFOX                                                         *
 ****************************************************************************/
 /** GENERAL ***/
-//pref("content.notify.interval", 100000);
-//
-///** GFX ***/
-//pref("gfx.canvas.accelerated.cache-items", 4096);
-//pref("gfx.canvas.accelerated.cache-size", 512);
-//pref("gfx.content.skia-font-cache-size", 20);
-//
-///** DISK CACHE ***/
-//pref("browser.cache.jsbc_compression_level", 3);
-//
-///** MEDIA CACHE ***/
-//pref("media.memory_cache_max_size", 65536);
-//pref("media.cache_readahead_limit", 7200);
-//pref("media.cache_resume_threshold", 3600);
-//
-///** IMAGE CACHE ***/
-//pref("image.mem.decode_bytes_at_a_time", 32768);
-//
-///** NETWORK ***/
-//pref("network.http.max-connections", 1800);
-//pref("network.http.max-persistent-connections-per-server", 10);
-//pref("network.http.max-urgent-start-excessive-connections-per-host", 5);
-//pref("network.http.pacing.requests.enabled", false);
-//pref("network.dnsCacheExpiration", 3600);
-//pref("network.ssl_tokens_cache_capacity", 10240);
-//
-///** SPECULATIVE LOADING ***/
-//pref("network.dns.disablePrefetch", true);
-//pref("network.dns.disablePrefetchFromHTTPS", true);
-//pref("network.prefetch-next", false);
-//pref("network.predictor.enabled", false);
-//pref("network.predictor.enable-prefetch", false);
-//
-///** EXPERIMENTAL ***/
-//pref("layout.css.grid-template-masonry-value.enabled", true);
-//pref("dom.enable_web_task_scheduling", true);
-//pref("dom.security.sanitizer.enabled", true);
+pref("content.notify.interval", 100000);
+
+/** GFX ***/
+pref("gfx.canvas.accelerated.cache-items", 4096);
+pref("gfx.canvas.accelerated.cache-size", 512);
+pref("gfx.content.skia-font-cache-size", 20);
+
+/** DISK CACHE ***/
+pref("browser.cache.jsbc_compression_level", 3);
+
+/** MEDIA CACHE ***/
+pref("media.memory_cache_max_size", 65536);
+pref("media.cache_readahead_limit", 7200);
+pref("media.cache_resume_threshold", 3600);
+
+/** IMAGE CACHE ***/
+pref("image.mem.decode_bytes_at_a_time", 32768);
+
+/** NETWORK ***/
+pref("network.http.max-connections", 1800);
+pref("network.http.max-persistent-connections-per-server", 10);
+pref("network.http.max-urgent-start-excessive-connections-per-host", 5);
+pref("network.http.pacing.requests.enabled", false);
+pref("network.dnsCacheExpiration", 3600);
+pref("network.ssl_tokens_cache_capacity", 10240);
+
+/** SPECULATIVE LOADING ***/
+pref("network.dns.disablePrefetch", true);
+pref("network.dns.disablePrefetchFromHTTPS", true);
+pref("network.prefetch-next", false);
+pref("network.predictor.enabled", false);
+pref("network.predictor.enable-prefetch", false);
+
+/** EXPERIMENTAL ***/
+pref("layout.css.grid-template-masonry-value.enabled", true);
+pref("dom.enable_web_task_scheduling", true);
+pref("dom.security.sanitizer.enabled", true);
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
@@ -81,7 +81,6 @@ pref("devtools.debugger.remote-enabled", false); // disable remote debugging
 pref("privacy.globalprivacycontrol.enabled", true); // make a request to visited site, that the user doesn't want any of his data sold and/or gathered. Respected by many sites
 pref("privacy.globalprivacycontrol.functionality.enabled", true);
 pref("privacy.globalprivacycontrol.pbmode.enabled", true);
-
 
 /** OCSP & CERTS / HPKP ***/
 // disable oscp -- explanation by yokoffing in betterfox.js/securefox: OCSP leaks your IP and domains you visit to the CA when OCSP Stapling is not available on visited host.
@@ -135,7 +134,7 @@ pref("layout.forms.reveal-password-button.enabled", true); // enable always show
 pref("signon.rememberSignons", false);
 pref("signon.rememberSignons.visibilityToggle", true); // DEFAULT
 pref("signon.schemeUpgrades", true); // DEFAULT
-pref("signon.showAutoCompleteFooter", true); // DEFAULT
+pref("signon.showAutoCompleteFooter", false); // DEFAULT
 pref("signon.autologin.proxy", false); // DEFAULT
 pref("extensions.formautofill.creditCards.enabled", false); // don't store credit card information locally
 pref("extensions.formautofill.addresses.enabled", false); // don't store address information locally
@@ -218,7 +217,7 @@ pref("browser.discovery.enabled", false); // Personalized Extension Recommendati
 pref("browser.shell.checkDefaultBrowser", false); // disables the "set hxy_browser as your default browser" thingy
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false); // disables contextual feature recommendations in addons
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false); // disables contextual feature recommendations in features?
-pref("browser.preferences.moreFromMozilla", false); // hides "more from Mozilla" text in settings
+pref("browser.preferences.moreFromMozilla", true); // hides "more from Mozilla" text in settings
 pref("browser.aboutConfig.showWarning", false); // removes the annoying warning in about:config
 pref("browser.aboutwelcome.enabled", true); // enables welcome page(about:welcome)
 pref("browser.tabs.tabmanager.enabled", false); // better tab organization with more tabs
@@ -307,13 +306,6 @@ pref("browser.preferences.defaultPerformanceSettings.enabled", false);
     pref("dom.ipc.processCount", 8); // determine by number of CPU cores/processors
 
 /****************************************************************************
- * START: MY OVERRIDES                                                      *
-****************************************************************************/
-// visit https://github.com/yokoffing/Betterfox/wiki/Common-Overrides
-// visit https://github.com/yokoffing/Betterfox/wiki/Optional-Hardening
-// Enter your personal overrides below this line:
-
-/****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
 ****************************************************************************/
 // visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
@@ -331,4 +323,3 @@ pref("mousewheel.default.delta_multiplier_y", 280);
 pref("browser.tabs.hoverPreview.showThumbnails", false);
 
 //********************************************************************************
-

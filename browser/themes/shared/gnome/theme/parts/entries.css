@@ -15,9 +15,9 @@
 .popup-notification-body input {
   -moz-appearance: none !important;
   background: var(--gnome-entry-background) !important;
-  outline: 2px solid transparent !important;
+  outline: 1px solid transparent !important;
   border: 0 !important;
-  border-radius: 6px !important;
+  border-radius: 0.6rem !important; /* 6px */
   box-shadow: none !important;
   color: var(--gnome-entry-color) !important;
   height: 34px !important;
@@ -41,8 +41,7 @@
 #editBMPanel_namePicker:focus-visible,
 #editBMPanel_tagsField:focus-visible,
 .popup-notification-body input:focus {
-  outline: 2px solid var(--gnome-focused-urlbar-border-color) !important;
-  outline-offset: -2px;
+  outline: 1px solid var(--gnome-focused-urlbar-border-color) !important;
   -moz-outline-radius: 5px;
 }
 
