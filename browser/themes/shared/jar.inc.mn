@@ -354,3 +354,5 @@
   skin/classic/browser/gnome/theme/icons/security-low-symbolic.svg (../shared/gnome/theme/icons/security-low-symbolic.svg)
   skin/classic/browser/gnome/theme/icons/message-symbolic.svg (../shared/gnome/theme/icons/message-symbolic.svg)
   skin/classic/browser/gnome/theme/icons/general-properties-symbolic.svg (../shared/gnome/theme/icons/general-properties-symbolic.svg)
+    skin/classic/browser/gnome/theme/icons/go-down-symbolic.svg (../shared/gnome/theme/icons/go-down-symbolic.svg)
+  skin/classic/browser/gnome/theme/icons/go-up-symbolic.svg (../shared/gnome/theme/icons/go-up-symbolic.svg)

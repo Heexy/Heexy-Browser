@@ -323,3 +323,28 @@ pref("mousewheel.default.delta_multiplier_y", 280);
 pref("browser.tabs.hoverPreview.showThumbnails", false);
 
 //********************************************************************************
+
+// Heexy Speed fox
+
+// Disable Animations (Not noticable)
+pref("browser.tab.animate", false); // Disables tab switching animations
+// Performance improvment settings
+pref("browser.panorama.animate_zoom", false); // Disables zoom animations in tab groups (Panorama)
+pref("browser.download.animateNotifications", false); // Speeds up download process by disabling animations
+pref("security.dialog_enable_delay", 0); // Removes delay for security dialog display
+pref("network.prefetch-next", false); // Stops prefetching to reduce bandwidth usage
+pref("layers.acceleration.disabled", true); // Disables hardware acceleration to avoid potential GPU-related performance issues
+pref("network.http.use-cache", true); // Enables caching of HTTP content for faster page loading
+pref("browser.cache.disk.capacity", 1048576); // Increases disk cache size to 1GB for better storage of cached data
+pref("browser.tabs.remote.autostart", false); // Disables multiprocess tabs for lower system resource usage on weak hardware
+pref("browser.cache.offline.enable", false); // Disables offline cache to ensure faster loading from the network
+pref("browser.transitions.enabled", false); // Disables animations between page transitions to improve responsiveness
+pref("network.image.http.accept", "image/webp,*/*;q=0.8"); // Prefers loading faster and compressed WebP images
+pref("network.http.pipelining", true); // Enables HTTP pipelining for parallel request handling
+pref("network.http.pipelining.maxrequests", 8); // Limits max simultaneous HTTP requests to 8 for balanced performance
+pref("network.http.connection-timeout", 10); // Sets a shorter connection timeout to avoid slow connections
+pref("network.dns.disableIPv6", true); // Disables IPv6 to reduce DNS lookup time and improve connection speed
+pref("places.history.enabled", false); // Disables browsing history to reduce resource usage
+pref("browser.formfill.enable", false); // Disables form autofill to speed up form-heavy page loads
+// Design
+pref("nglayout.enable_drag_images", false); // Disable tab preview when you moving with tabs
