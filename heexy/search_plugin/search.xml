@@ -5,6 +5,6 @@
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="16" height="16">icon.png</Image>
   <Url type="text/html" method="GET" template="https://heexy.org/search?q={searchTerms}"/>
-  <SearchForm>https://heexy.org/search?)</SearchForm>
+  <SearchForm>https://heexy.org/search?</SearchForm>
   <SuggestionsUrl>https://heexy.org/search?q={searchTerms}</SuggestionsUrl>
 </SearchPlugin>
