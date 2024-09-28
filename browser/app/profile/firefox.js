@@ -1452,7 +1452,7 @@ pref("app.support.baseURL", "https://www.mozilla.org/");
 // base url for web-based feedback pages
 pref("app.feedback.baseURL", "https://www.mozilla.org/");
 
-pref("security.certerrors.recordEventTelemetry", true);
+pref("security.certerrors.recordEventTelemetry", false);
 pref("security.certerrors.permanentOverride", true);
 pref("security.certerrors.mitm.priming.enabled", true);
 pref("security.certerrors.mitm.priming.endpoint", "https://mitmdetection.services.mozilla.com/");
@@ -1574,7 +1574,7 @@ pref("services.sync.prefs.sync.accessibility.browsewithcaret", true);
 pref("services.sync.prefs.sync.accessibility.typeaheadfind", true);
 pref("services.sync.prefs.sync.accessibility.typeaheadfind.linksonly", true);
 pref("services.sync.prefs.sync.addons.ignoreUserEnabledChanges", true);
-pref("services.sync.prefs.sync.app.shield.optoutstudies.enabled", true);
+pref("services.sync.prefs.sync.app.shield.optoutstudies.enabled", false);
 // The addons prefs related to repository verification are intentionally
 // not synced for security reasons. If a system is compromised, a user
 // could weaken the pref locally, install an add-on from an untrusted
@@ -1582,7 +1582,7 @@ pref("services.sync.prefs.sync.app.shield.optoutstudies.enabled", true);
 // uncompromised Sync-connected devices.
 pref("services.sync.prefs.sync.browser.contentblocking.category", true);
 pref("services.sync.prefs.sync.browser.contentblocking.features.strict", true);
-pref("services.sync.prefs.sync.browser.crashReports.unsubmittedCheck.autoSubmit2", true);
+pref("services.sync.prefs.sync.browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 pref("services.sync.prefs.sync.browser.ctrlTab.sortByRecentlyUsed", true);
 pref("services.sync.prefs.sync.browser.discovery.enabled", true);
 pref("services.sync.prefs.sync.browser.download.useDownloadDir", true);
@@ -2571,7 +2571,7 @@ pref("app.normandy.shieldLearnMoreUrl", "");
 pref("app.normandy.last_seen_buildid", "");
 pref("app.normandy.onsync_skew_sec", 600);
 #ifdef MOZ_DATA_REPORTING
-  pref("app.shield.optoutstudies.enabled", true);
+  pref("app.shield.optoutstudies.enabled", false);
 #else
   pref("app.shield.optoutstudies.enabled", false);
 #endif

@@ -324,7 +324,7 @@ pref("browser.tabs.hoverPreview.showThumbnails", false);
 
 //********************************************************************************
 
-// Heexy Speed fox
+// Heexy Speedfox improvments
 
 // Disable Animations (Not noticable)
 pref("browser.tab.animate", false); // Disables tab switching animations
