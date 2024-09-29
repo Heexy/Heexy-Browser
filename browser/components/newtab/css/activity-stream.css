@@ -34,8 +34,8 @@ input {
 
 :root {
   color-scheme: light;
-  --newtab-background-color: #F9F9FB;
-  --newtab-background-color-secondary: #FFF;
+  --newtab-background-color: #F9F9FB !important;
+  --newtab-background-color-secondary: #FFF !important;
   --newtab-text-primary-color: #15141a;
   --newtab-contextual-text-primary-color: light-dark(var(--newtab-text-primary-color), #fbfbfe);
   --newtab-primary-action-background: light-dark(#0061e0, #00ddff);
@@ -76,8 +76,8 @@ input {
 }
 :root[lwt-newtab-brighttext] {
   color-scheme: dark;
-  --newtab-background-color: #2B2A33;
-  --newtab-background-color-secondary: #42414d;
+  --newtab-background-color: #121212 !important;
+  --newtab-background-color-secondary: #1e1e1e !important;
   --newtab-text-primary-color: #fbfbfe;
   --newtab-contextual-text-primary-color: light-dark(#15141a, var(--newtab-text-primary-color));
   --newtab-primary-action-background-pocket: #00ddff;
