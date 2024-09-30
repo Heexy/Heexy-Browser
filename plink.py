@@ -402,12 +402,14 @@ add_userjs_prefsjs_to_profile_after_build: true""")
 
         return self.user_input_value
 
-    async def activate_input(self):
+    async def activate_input(self, event=None):
         """Activate the input field."""
         self.input_active = True
         input_box = self.query_one(Input)
         input_box.disabled = False  # Enable the input field
         input_box.focus()  # Set focus to the input field
+        if event is not None:
+            event.input.value = ""
         await asyncio.sleep(0)
 
     async def deactivate_input(self):
@@ -577,7 +579,7 @@ add_userjs_prefsjs_to_profile_after_build: true""")
                 await self.deactivate_input()
                 input_box = self.query_one(Input)
                 input_box.refresh()
-                await self.activate_input()
+                await self.activate_input(event)
                 self.log_handler.log("Input redrawn")
             elif user_input.startswith("mach"):
                 cmd_by_usr_input = user_input.split(" ")[:1]
@@ -585,12 +587,14 @@ add_userjs_prefsjs_to_profile_after_build: true""")
                 await task
             elif user_input == "close" or user_input == "quit":
                 self.exit(0)
-            else:
+            elif user_input == "":
+                pass
+            elif user_input not in commands:
                 self.log_handler.log(f'Unknown command - "{user_input}"', "e")
 
-            event.input.value = ""
-            await asyncio.sleep(0)
-            await self.activate_input()
+
+            await asyncio.sleep(0.001)
+            await self.activate_input(event)
             return user_input
 
     async def wait_for_input(self):
