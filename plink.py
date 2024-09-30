@@ -1,9 +1,12 @@
+# version 0.0.3 - "purple cat"
+__plinK_version__ = '0.0.3'
 import os
 import re
 from datetime import datetime
 from textual.app import App, ComposeResult
 from textual.containers import Container
 from textual.widgets import Header, Footer, Static, Input
+from textual.suggester import SuggestFromList
 # from textual import events
 # from textual.reactive import reactive
 import colorama
@@ -14,15 +17,14 @@ import asyncio
 import yaml
 import shutil
 from distutils.dir_util import copy_tree
-
 # import nest_asyncio
 # nest_asyncio.apply()
 
-
+commands = ["profile build", "profile push", "profile src build", "profile sync prefs", "build", "run", "clear cache", "rd", "mach", "close"]
 # Initialize Colorama for handling colored output
 colorama.init(autoreset=True)
 
-startingdir = os.getcwd()
+startingdir = os.getcwd().replace("\\", "/")
 
 build_dir = f"{startingdir}/obj-x86_64-pc-windows-msvc"
 profile_dir = f"{startingdir}\\plinK_data\\profile"
@@ -66,13 +68,21 @@ def load_config(config_file):
 def remove_ansi_codes(text: str) -> str:
     ansi_escape = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
     return ansi_escape.sub('', text)
+def remove_control_sequences(text: str) -> str:
+    # Regex to match both ANSI codes and additional control sequences like '←(B'
+    control_seq = re.compile(r'(\x1B[@-_][0-?]*[ -/]*[@-~])|(\x1B\[.*?m)|([^\x20-\x7E])')
+    return control_seq.sub('', text)
+
 
 class LogHandler:
     """Handles logging messages with different severity levels."""
 
-    def __init__(self, log_widget):
+    def __init__(self, log_widget, build_profile_after_build, copy_js_conf_after_build, profile_builder=None):
         self.start_time = datetime.now()
         self.log_widget = log_widget
+        self.build_profile = build_profile_after_build
+        self.copy_js_conf = copy_js_conf_after_build
+        self.profile_builder = profile_builder
 
     def log(self, message, level="i"):
         # Get the current timestamp
@@ -89,15 +99,74 @@ class LogHandler:
         # Get the level name and color
         level_name, color = levels.get(level, ("INFO", Fore.WHITE))
         lines = str(message).split("\\n")
+        with open("plinK.log.temp", "w+", errors="replace") as f:
+            f.write("\n".join(lines))
+        with open("plinK.log.temp", "r+", errors="replace") as f:
+            lines = f.readlines()
         # self.log_widget.write(lines)
         for line in lines:
-            line = remove_ansi_codes(line)
+            line = remove_control_sequences(line)
+            with open("plinK.log", "a+", errors="replace") as ff:
+                ff.write(f"{line}\n")
+
+            if "Your build was successful!" in line:
+                log_message = f"— [{timestamp}] [{level_name}] {Fore.WHITE}----------{Fore.RESET} —"
+                log_message = Text.from_ansi(log_message)
+                self.log_widget.write(log_message)
+                log_message = f"— [{timestamp}] [{level_name}] {Fore.GREEN}Your build has finished building :yipeeee:{Fore.RESET} —"
+                log_message = Text.from_ansi(log_message)
+                self.log_widget.write(log_message)
+                log_message = f"— [{timestamp}] [{level_name}] {Fore.WHITE}----------{Fore.RESET} —"
+                log_message = Text.from_ansi(log_message)
+                self.log_widget.write(log_message)
+            elif "Your build was successful!" in line and self.build_profile and self.profile_builder is not None:
+                self.profile_builder()
+            elif "Your build was successful!" in line and self.copy_js_conf:
+                self.log_widget.write(f"— [{timestamp}] [INFO] {Fore.CYAN}Copying prefs.js and user.js from new build to profile{Fore.RESET} —")
+                shutil.copy(f"{build_dir}/tmp/profile-default/prefs.js", profile_dir)
+                shutil.copy(f"{build_dir}/tmp/profile-default/user.js", profile_dir)
+
             # Format the log message with Colorama color codes
             log_message = f"— [{timestamp}] [{level_name}] {color}{line}{Fore.RESET} —"
             log_message = Text.from_ansi(log_message)
 
             # Add the log message to the widget (without ANSI codes)
             self.log_widget.write(log_message)
+            with open("plinK.log.temp", "w+", errors="replace") as f:
+                f.write("")
+
+
+# Function to extract preferences from a file with user_pref or pref
+def extract_prefs(file_content):
+    # Regex to match user_pref or pref ("key", value);
+    prefs = re.findall(r'(?:user_pref|pref)\("(.+?)",\s*(.+?)\);', file_content)
+    return {key: value for key, value in prefs}
+
+
+# Function to format preferences with "pref("
+def format_prefs(prefs):
+    return [f'pref("{key}", {value});' for key, value in prefs.items()]
+
+
+# Function to preserve non-pref lines (e.g., #include, #ifdef)
+def merge_prefs_with_directives(file_content, formatted_prefs):
+    new_lines = []
+    prefs_dict = {pref.split('",')[0]: pref for pref in formatted_prefs}  # For easy lookup of updated prefs
+
+    for line in file_content.splitlines():
+        stripped_line = line.strip()
+        if stripped_line.startswith(("pref(", "user_pref(")):
+            # Extract the preference name to replace the line if it exists in prefs_dict
+            pref_match = re.match(r'(?:user_pref|pref)\("(.+?)",', stripped_line)
+            if pref_match:
+                pref_name = pref_match.group(1)
+                if pref_name in prefs_dict:
+                    new_lines.append(prefs_dict[pref_name])
+                    continue
+        # Keep the line unchanged if it's not a preference line
+        new_lines.append(line)
+
+    return "\n".join(new_lines)
 
 
 class StartApp(App):
@@ -122,6 +191,8 @@ class StartApp(App):
         height: 3;
     }
     """
+    TITLE = "plinK"
+    SUB_TITLE = "plinK"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -134,12 +205,13 @@ class StartApp(App):
         self.task_finished_event = asyncio.Event()
 
     def compose(self) -> ComposeResult:
-        yield Header(show_clock=True)
+        yield Header(show_clock=True, name="plinK")
         yield Container(
             RichLog(classes="window", id="top"),
             RichLog(classes="window", id="bottom", auto_scroll=True)
         )
-        yield Input(placeholder="Enter command for plinK", id="input", disabled=True)
+        yield Input(placeholder="Enter command for plinK - (press tab to change focused widget)", id="input",
+                    disabled=True, suggester=SuggestFromList(commands, case_sensitive=True))
         yield Footer()
 
     async def _read_stream(self, stream, cb):
@@ -210,8 +282,8 @@ class StartApp(App):
         # Initialize the log handler with the bottom window (log widget)
         self.bottom_window = self.query_one("#bottom", RichLog)
         self.top_window = self.query_one("#top", RichLog)
-        self.log_handler = LogHandler(self.bottom_window)
-        self.log_handler_top = LogHandler(self.top_window)
+        self.log_handler = LogHandler(self.bottom_window, build_profile_after_build=False, copy_js_conf_after_build=False)
+        self.log_handler_top = LogHandler(self.top_window, build_profile_after_build=False, copy_js_conf_after_build=False)
 
         # Log some messages
         self.log_handler.log("plinK", "i")
@@ -219,8 +291,17 @@ class StartApp(App):
         await asyncio.sleep(1)  # TODO: Find a better way to get when the window is created/loaded
 
         # Check if it's the first start
-        if not os.path.exists(f"{startingdir}/plinK_data/first_start.plink"):
+
+        with open(f"{startingdir}/plinK_data/first_start.plink", "r") as f:
+            last_version = f.read().strip()
+        if not os.path.exists(f"{startingdir}/plinK_data/first_start.plink") or last_version != __plinK_version__:
+            if last_version != __plinK_version__:
+                self.log_handler.log("!!RECONFIGURING PLINK BECAUSE OF AN UPDATE!!")
+                self.log_handler.log("---Your plinK.buildconfig file WILL BE LOST---", "w")
+                await asyncio.sleep(2)
+                self.log_handler.log(f"Old version: {last_version}")
             self.log_handler.log("First run", "w")
+            self.log_handler.log(f"plinK version: {__plinK_version__}")
             # self.log_handler.log("Need to clear cache", "w")
             self.log_handler.log("--------------------------------")
             self.log_handler.log("Run ./mach bootstrap if you don't have mach set-up", "w")
@@ -233,21 +314,31 @@ class StartApp(App):
             # task = asyncio.create_task(self.activate_input())
             # await task
             self.log_handler.log("Creating build config file")
-            with open(f"{startingdir}/plinK.buildconfig", "x"):
+            try:
+                with open(f"{startingdir}/plinK.buildconfig", "x"):
+                    pass
+            except FileExistsError:
                 pass
             with open(f"{startingdir}/plinK.buildconfig", "w") as f:
                 f.write("""preserve_bookmarks: true
 preserve_profile: true
 preserve_extensions: true
-preserve_folders: []""")
+preserve_folders: []
+build_profile_after_build: false
+add_userjs_prefsjs_to_profile_after_build: true""")
             await asyncio.sleep(1)
             self.log_handler.log(f"Done!")
             self.log_handler.log("--------------------------------")
             self.log_handler.log(f"plinK's buildconfig file is in {startingdir}/plinK.buildconfig", "w")
             self.log_handler.log("--------------------------------")
             self.log_handler.log("Finishing up...")
-            with open(f"{startingdir}/plinK_data/first_start.plink", "x"):
+            try:
+                with open(f"{startingdir}/plinK_data/first_start.plink", "x"):
+                    pass
+            except FileExistsError:
                 pass
+            with open(f"{startingdir}/plinK_data/first_start.plink", "w") as f:
+                f.write(__plinK_version__)
             self.log_handler.log("Some features might not work while mach is building", "w")
             self.log_handler.log("Most features will not work until you create a user profile/run your build", "w")
         self.log_handler.log("Loading config...")
@@ -256,6 +347,12 @@ preserve_folders: []""")
         self.PRESERVE_EXTENSIONS = bool(config["preserve_extensions"])
         self.PRESERVE_FOLDERS = config["preserve_folders"]
         self.PRESERVE_BOOKMARKS = bool(config["preserve_bookmarks"])
+        self.BUILD_PROFILE_AFTER_BUILD = bool(config["build_profile_after_build"])
+        self.COPY_JS_CONFIG_AFTER_BUILD = bool(config["add_userjs_prefsjs_to_profile_after_build"])
+        self.log_handler = LogHandler(self.bottom_window, build_profile_after_build=self.BUILD_PROFILE_AFTER_BUILD,
+                                      copy_js_conf_after_build=self.COPY_JS_CONFIG_AFTER_BUILD, profile_builder=self.profile_build())
+        self.log_handler_top = LogHandler(self.top_window, build_profile_after_build=self.BUILD_PROFILE_AFTER_BUILD,
+                                          copy_js_conf_after_build=self.COPY_JS_CONFIG_AFTER_BUILD, profile_builder=self.profile_build())
 
         #     os.chdir(startingdir)
         #     self.log_handler_top.log(self.execute(f"test.bat", lambda x: print("STDOUT: %s" % x),
@@ -372,9 +469,23 @@ preserve_folders: []""")
         self.log_handler.log("Profile building done!")
         return asyncio.sleep(0)
 
+
     async def on_input_submitted(self, event: Input.Submitted):
         """Handle user input when they press Enter."""
         if self.input_active:
+            config = load_config(f"{startingdir}/plinK.buildconfig")
+            self.PRESERVE_PROFILE = bool(config["preserve_profile"])
+            self.PRESERVE_EXTENSIONS = bool(config["preserve_extensions"])
+            self.PRESERVE_FOLDERS = config["preserve_folders"]
+            self.PRESERVE_BOOKMARKS = bool(config["preserve_bookmarks"])
+            self.BUILD_PROFILE_AFTER_BUILD = bool(config["build_profile_after_build"])
+            self.COPY_JS_CONFIG_AFTER_BUILD = bool(config["add_userjs_prefsjs_to_profile_after_build"])
+            self.log_handler = LogHandler(self.bottom_window, build_profile_after_build=self.BUILD_PROFILE_AFTER_BUILD,
+                                          copy_js_conf_after_build=self.COPY_JS_CONFIG_AFTER_BUILD,
+                                          profile_builder=self.profile_build())
+            self.log_handler_top = LogHandler(self.top_window, build_profile_after_build=self.BUILD_PROFILE_AFTER_BUILD,
+                                              copy_js_conf_after_build=self.COPY_JS_CONFIG_AFTER_BUILD,
+                                              profile_builder=self.profile_build())
             user_input = event.value
             # self.log_handler.log(f"User input: {user_input}", "i")
             self.user_input_value = user_input
@@ -382,6 +493,53 @@ preserve_folders: []""")
             self.user_input_event.set()  # Notify that input has been received
             if user_input == "profile build":
                 task = asyncio.create_task(self.profile_build())
+                await task
+
+            if user_input == "profile src build":
+
+                self.log_handler_top.log("Merging prefs.js, user.js and .../bin/browser/defaults/preferences/firefox.js")
+                self.log_handler.log("Current preferences in .../browser/app/profile/firefox.js will be replaced")
+                self.log_handler.log("Run profile will be deleted", "w")
+                # Read the contents of user.js, prefs.js, and firefox.js
+                with open(f"{build_dir}/tmp/profile-default/user.js", 'r', errors="ignore") as user_file:
+                    user_content = user_file.read()
+
+                with open(f"{build_dir}/tmp/profile-default/prefs.js", 'r', errors="ignore") as prefs_file:
+                    prefs_content = prefs_file.read()
+
+                with open(f"{startingdir}/browser/app/profile/firefox.js", "r", errors="ignore") as f:
+                    ffjs_def = f.read()
+
+                # Extract preferences from all files (handling user_pref and pref)
+                prefs = extract_prefs(prefs_content)  # From prefs.js
+                user_prefs = extract_prefs(user_content)  # From user.js
+                ffprefs = extract_prefs(ffjs_def)  # From firefox.js
+
+                # Overwrite prefs with user.js values
+                prefs.update(user_prefs)
+
+                # Merge firefox.js prefs with the updated prefs from user.js and prefs.js
+                ffprefs.update(prefs)
+
+                # Format preferences with "pref("
+                formatted_prefs = format_prefs(ffprefs)
+
+                # Merge formatted prefs with original firefox.js, preserving non-pref lines
+                merged_content = merge_prefs_with_directives(ffjs_def, formatted_prefs)
+
+                if os.path.exists(f"{startingdir}/browser/app/profile/firefox.js.old"):
+                    os.remove(f"{startingdir}/browser/app/profile/firefox.js.old")
+                os.rename(f"{startingdir}/browser/app/profile/firefox.js", f"{startingdir}/browser/app/profile/firefox.js.old")
+                os.remove(f"{build_dir}/dist/bin/browser/defaults/preferences/firefox.js")
+                shutil.rmtree(f"{build_dir}/tmp/profile-default")
+
+                with open(f"{startingdir}/browser/app/profile/firefox.js", 'w', encoding="utf-8", errors="replace") as output_file:
+                    output_file.write(merged_content)
+
+                self.log_handler.log("Source profile building finished")
+                self.log_handler.log("Building app and applying changes...", "w")
+                self.log_handler.log("app_build", "d")
+                task = asyncio.create_task(self.run_mach("build"))
                 await task
             elif user_input == "profile push":
                 self.log_handler.log("Pushing profile into rundir...")
@@ -395,6 +553,7 @@ preserve_folders: []""")
                 self.log_handler.log(f"Building...")
                 task = asyncio.create_task(self.run_mach("build"))
                 await task
+                self.log_handler.log(f"ello")
             elif user_input == "run":
                 self.log_handler.log(f"Copying profile...")
                 self.log_handler.log(f"Profile in {build_dir}/tmp/profile-default WILL BE LOST", "w")
@@ -411,9 +570,9 @@ preserve_folders: []""")
                 await task
             elif user_input == "rd":
                 self.log_handler.log("Redrawing...", "w")
-                self.bottom_window.refresh()
+                await asyncio.create_task(self.bottom_window.recompose())
                 self.log_handler.log("Bottom window redrawn")
-                self.top_window.refresh()
+                await asyncio.create_task(self.top_window.recompose())
                 self.log_handler_top.log("Top window redrawn")
                 await self.deactivate_input()
                 input_box = self.query_one(Input)
@@ -425,10 +584,11 @@ preserve_folders: []""")
                 task = self.run_mach("".join(cmd_by_usr_input))
                 await task
             elif user_input == "close" or user_input == "quit":
-                return 0
+                self.exit(0)
             else:
-                self.log_handler.log("Unknown command", "e")
+                self.log_handler.log(f'Unknown command - "{user_input}"', "e")
 
+            event.input.value = ""
             await asyncio.sleep(0)
             await self.activate_input()
             return user_input
