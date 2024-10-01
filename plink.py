@@ -105,7 +105,7 @@ class LogHandler:
             lines = f.readlines()
         # self.log_widget.write(lines)
         for line in lines:
-            line = remove_control_sequences(line)
+            line = remove_control_sequences(line).replace("←(", "").replace("←[", "")
             with open("plinK.log", "a+", errors="replace") as ff:
                 ff.write(f"{line}\n")
 
@@ -498,7 +498,6 @@ add_userjs_prefsjs_to_profile_after_build: true""")
                 await task
 
             if user_input == "profile src build":
-
                 self.log_handler_top.log("Merging prefs.js, user.js and .../bin/browser/defaults/preferences/firefox.js")
                 self.log_handler.log("Current preferences in .../browser/app/profile/firefox.js will be replaced")
                 self.log_handler.log("Run profile will be deleted", "w")
@@ -568,6 +567,8 @@ add_userjs_prefsjs_to_profile_after_build: true""")
                 await self.deactivate_input()
                 await asyncio.sleep(2)
             elif user_input == "clear cache":
+                self.log_handler_top.log("Clearing cache...")
+                self.log_handler_top.log("This may take some time")
                 task = asyncio.create_task(self.run_mach("clobber"))
                 await task
             elif user_input == "rd":
@@ -606,4 +607,7 @@ add_userjs_prefsjs_to_profile_after_build: true""")
 
 # Run the app
 if __name__ == "__main__":
-    StartApp().run()
+    try:
+        StartApp().run()
+    except RuntimeError as e:
+        print(e)
