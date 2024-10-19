@@ -773,7 +773,7 @@ pref("browser.search.serpEventTelemetryCategorization.enabled", false);
 // experiment info (and not actual SERP categorizations) at startup.
 pref("browser.search.serpMetricsRecordedCounter", 0);
 
-// Search Bar removal from the toolbar for users who havenĂ˘â‚¬â„˘t used it in 120
+// Search Bar removal from the toolbar for users who haven't used it in 120
 // days
 pref("browser.search.widget.removeAfterDaysUnused", 120);
 
@@ -884,14 +884,14 @@ pref("permissions.fullscreen.allowed", false);
 
 #ifdef MOZ_WEBRTC
   // When users grant camera or microphone through a permission prompt
-  // and leave "Ă˘ Remember this decision" unchecked, Gecko persists
+  // and leave "Ä‚Ë Remember this decision" unchecked, Gecko persists
   // their choice to "Always ask" for this permission going forward.
   // This is exposed to websites through the permissions.query() API
   // as "granted", to ward off well-meaning attempts to further escalate
   // permission to always grant, to help sites respect this user choice.
   //
   // By default, these permissions are only visible in Tools / Page Info.
-  // But turning this pref on also makes them show up as "Always Ask Ă˘Ĺ›â€“"
+  // But turning this pref on also makes them show up as "Always Ask Ä‚ËÄąâ€şĂ˘â‚¬â€ś"
   // in the more prominent site permissions dropdown.
   pref("permissions.media.show_always_ask.enabled", false);
 #endif

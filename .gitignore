@@ -59,6 +59,11 @@ ID
 /.machrc
 /plinK.buildconfig
 /plinK_data/first_start.plink
+/plinK.log
+/plinK.log.temp
+/plinK_data/plinK_*.log
+/plinK_data/profile/storage/permanent/chrome/idb
+/plinK_data/profile_old
 # pyenv artifact
 /.python-version
 
