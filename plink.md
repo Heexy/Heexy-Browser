@@ -173,7 +173,7 @@ and then press `ctrl+c` to close plinK
 ---
 
 ## 👀 License
-PlinK is licensed as [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+PlinK is licensed as [MPL Version 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
 
 ## 📌 Note
 This documentation outlines the key commands and processes for using plinK. For any additional help, refer to the in-app log messages or contact Heexy devs.
