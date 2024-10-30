@@ -17,7 +17,7 @@ from textual.widgets import RichLog
 import asyncio
 import yaml
 import shutil
-from distutils.dir_util import copy_tree
+# from setuptools import copy_tree
 import sys
 import aiofiles
 import time
@@ -33,14 +33,17 @@ colorama.init(autoreset=True)
 startingdir = os.getcwd().replace("\\", "/")
 session_id = str(datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
-build_dir = f"{startingdir}/obj-x86_64-pc-windows-msvc"
+build_dir = f"{startingdir}/obj-x86_64-pc-windows-msvc"  # placeholder
 profile_dir = f"{startingdir}\\plinK_data\\profile"
 
-if not os.name == 'nt':
-    print(f"{Fore.RED}The plinK build tool is not available on your system")
-    print("im sowwy :c, don't worry, I also hate windows and plan to make plinK officially compatible with linux")
-    print("Theoretically plinK might just work if you remove this check, that checks the current os, but I cannot "
+if os.name != 'nt' and not sys.platform.startswith("linux"):
+    print(f"{Fore.RED}The plinK build tool is not available on your system({sys.platform})")
+    print("im sowwy :c")
+    print("Theoretically plinK might just work if you remove this check, that checks the current os, "
+          "and edit plinK.buildconfig to have the correct build dir but I cannot"
           "guarantee it.")
+    print("If you think this is a mistake, simply remove this check")
+    print("If you remove this check make sure to NOT commit with it removed")
     input(f"{Fore.RESET} Press enter to exit")
     quit(1)
 
@@ -92,6 +95,45 @@ def remove_control_sequences(text: str) -> str:
     # Regex to match both ANSI codes and additional control sequences like '←(B'
     control_seq = re.compile(r'(\x1B[@-_][0-?]*[ -/]*[@-~])|(\x1B\[.*?m)|([^\x20-\x7E])')
     return control_seq.sub('', text)
+
+
+# Function to extract preferences from a file with user_pref or pref
+def extract_prefs(file_content):
+    # Regex to match user_pref or pref ("key", value);
+    prefs = re.findall(r'(?:user_pref|pref)\("(.+?)",\s*(.+?)\);', file_content)
+    return {key: value for key, value in prefs}
+
+
+# Function to format preferences with "pref("
+def format_prefs(prefs):
+    return [f'pref("{key}", {value});' for key, value in prefs.items()]
+
+
+# Function to preserve non-pref lines (e.g., #include, #ifdef)
+def merge_prefs_with_directives(file_content, formatted_prefs):
+    new_lines = []
+    prefs_dict = {pref.split('",')[0]: pref for pref in formatted_prefs}  # For easy lookup of updated prefs
+
+    for line in file_content.splitlines():
+        stripped_line = line.strip()
+        if stripped_line.startswith(("pref(", "user_pref(")):
+            # Extract the preference name to replace the line if it exists in prefs_dict
+            pref_match = re.match(r'(?:user_pref|pref)\("(.+?)",', stripped_line)
+            if pref_match:
+                pref_name = pref_match.group(1)
+                if pref_name in prefs_dict:
+                    new_lines.append(prefs_dict[pref_name])
+                    continue
+        # Keep the line unchanged if it's not a preference line
+        new_lines.append(line)
+
+    return "\n".join(new_lines)
+
+
+try:
+    build_dir = f"{startingdir}/{str(load_config_file(f"{startingdir}/plinK.buildconfig")["build_dir"])}"
+except Exception:
+    print("Failed to update build dir")
 
 
 class LogHandler:
@@ -165,39 +207,6 @@ class LogHandler:
         with open(file, "r") as f:
             lines = f.readlines()
         self.log_widget.write(Text.from_ansi("".join(lines)))
-
-
-# Function to extract preferences from a file with user_pref or pref
-def extract_prefs(file_content):
-    # Regex to match user_pref or pref ("key", value);
-    prefs = re.findall(r'(?:user_pref|pref)\("(.+?)",\s*(.+?)\);', file_content)
-    return {key: value for key, value in prefs}
-
-
-# Function to format preferences with "pref("
-def format_prefs(prefs):
-    return [f'pref("{key}", {value});' for key, value in prefs.items()]
-
-
-# Function to preserve non-pref lines (e.g., #include, #ifdef)
-def merge_prefs_with_directives(file_content, formatted_prefs):
-    new_lines = []
-    prefs_dict = {pref.split('",')[0]: pref for pref in formatted_prefs}  # For easy lookup of updated prefs
-
-    for line in file_content.splitlines():
-        stripped_line = line.strip()
-        if stripped_line.startswith(("pref(", "user_pref(")):
-            # Extract the preference name to replace the line if it exists in prefs_dict
-            pref_match = re.match(r'(?:user_pref|pref)\("(.+?)",', stripped_line)
-            if pref_match:
-                pref_name = pref_match.group(1)
-                if pref_name in prefs_dict:
-                    new_lines.append(prefs_dict[pref_name])
-                    continue
-        # Keep the line unchanged if it's not a preference line
-        new_lines.append(line)
-
-    return "\n".join(new_lines)
 
 
 class StartApp(App):
@@ -296,6 +305,7 @@ class StartApp(App):
         cmd = ["python", f"{startingdir}/mach"] + command.split()
 
         # Real-time stdout and stderr logging
+        # Yes these coroutines aren't awaited for a reason
         asyncio.create_task(
             self._run_subprocess(
                 cmd,
@@ -310,6 +320,7 @@ class StartApp(App):
         cmd = command.split()
 
         # Real-time stdout and stderr logging
+        # Yes these coroutines aren't awaited for a reason
         asyncio.create_task(
             self._run_subprocess(
                 cmd,
@@ -329,8 +340,6 @@ class StartApp(App):
         self.PRESERVE_BOOKMARKS = bool(config["preserve_bookmarks"])
         self.BUILD_PROFILE_AFTER_BUILD = bool(config["build_profile_after_build"])
         self.COPY_JS_CONFIG_AFTER_BUILD = bool(config["add_userjs_prefsjs_to_profile_after_build"])
-        # self.log_handler.log(f"{self.PRESERVE_PROFILE, self.PRESERVE_EXTENSIONS, self.PRESERVE_FOLDERS, self.IGNORE_FOLDERS, self.IGNORE_FILES}"
-        #       f"{self.PRESERVE_BOOKMARKS, self.BUILD_PROFILE_AFTER_BUILD, self.COPY_JS_CONFIG_AFTER_BUILD}")
 
     async def on_mount(self):
         """Called when the app is ready to start."""
@@ -384,14 +393,15 @@ class StartApp(App):
             except FileExistsError:
                 pass
             with open(f"{startingdir}/plinK.buildconfig", "w") as f:
-                f.write("""preserve_bookmarks: true
+                f.write("""build_dir: obj-x86_64-pc-windows-msvc
+preserve_bookmarks: true
 preserve_profile: true
 preserve_extensions: true
 preserve_folders: []
 ignore_folders: ["storage/permanent/chrome/idb", "cache2"]
 ignore_files: []
 build_profile_after_build: false
-add_userjs_prefsjs_to_profile_after_build: false""")
+add_userjs_prefsjs_to_profile_after_build: false""")  # We assume, that user is on windows TODO: Make it change based on sys.platform
             await asyncio.sleep(1)
             self.log_handler.log(f"Done!")
             self.log_handler.log("--------------------------------")
@@ -494,7 +504,7 @@ add_userjs_prefsjs_to_profile_after_build: false""")
         input_box.disabled = True  # Disable the input field
         await asyncio.sleep(0)
 
-    async def profile_build(self): # TODO: Make this ignore files and folders
+    async def profile_build(self):  # TODO: Make this ignore files and folders
         def ignore_files_and_dirs(src, names):
             """Custom ignore function to filter files based on config."""
             ignore_files = self.IGNORE_FILES
@@ -648,7 +658,7 @@ add_userjs_prefsjs_to_profile_after_build: false""")
                 await task
             elif user_input == "profile push":
                 self.log_handler.log("Pushing profile into rundir...")
-                copy_tree(profile_dir, f"{build_dir}/tmp/profile-default")
+                shutil.copytree(profile_dir, f"{build_dir}/tmp/profile-default")
                 self.log_handler.log("Done")
             elif user_input == "profile sync prefs":
                 shutil.copy(f"{build_dir}/tmp/profile-default/prefs.js", profile_dir)
@@ -662,7 +672,7 @@ add_userjs_prefsjs_to_profile_after_build: false""")
             elif user_input == "run":
                 self.log_handler.log(f"Copying profile...")
                 self.log_handler.log(f"Profile in {build_dir}/tmp/profile-default WILL BE LOST", "w")
-                copy_tree(profile_dir, f"{build_dir}/tmp/profile-default")
+                shutil.copytree(profile_dir, f"{build_dir}/tmp/profile-default")
                 await asyncio.sleep(1)
                 # task = asyncio.create_task(self.run_cmd(f"{build_dir}/dist/bin/firefox.exe -profile '{build_dir}/tmp/profile-default'"))
                 task = asyncio.create_task(self.run_mach("run"))
