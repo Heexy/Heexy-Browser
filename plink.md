@@ -10,15 +10,16 @@ By Heexy
 3. [Building Firefox](#3-building-firefox)
 4. [Building the Profile](#4-building-the-profile)
 5. [Running Firefox](#5-running-firefox)
-6. [Other Commands](#6-other-commands)
-7. [Known issues](#7-known-issues)
-
+6. [Reproducing changes](#6-making-sure-that-your-changes-are-reproducible) 
+7. [Other Commands](#7-other-commands)
+8. [Known issues](#8-known-issues)
+ 
 ---
 
 ## 1. Getting Things Set Up
 
 ### 💪 Requirements:
-- **plinK** currently only supports **Windows** (NT-based systems).
+- **plinK** currently supports **NT-based systems(Windows)** and **Linux** systems.
 - A terminal with a modern rendering engine, that supports dynamic redraw. (Most IDE terminals won't work. Terminals with AtlasEngine might sometimes see blue text as pink)
 - Ensure that the Firefox source code and the **mach** build tool are available in your working directory.
 - Ensure, that you have python and the proper packages installed (automatic package installer coming soon)
@@ -30,9 +31,14 @@ By Heexy
 4. `plinK` will automatically setup it's build environment
    - It will create a `plinK.buildconfig` file where you can configure profile and extension preservation options.
    - It will also build Heexy browser for the first time - First build can take more than an hour to complete
-5. After it finishes building the first build it's recommended to run the `run` command using the plonKsole (plinK's console). This will create the default user profile.
+5. After it finishes building the first build:
+   - On Windows
+     - it's recommended to run the `run` command using the plonKsole (plinK's console). This will create the default user profile.
+   - On Linux
+     - Edit `plinK.buildconfig`, so that `build_dir` matches the actual build dir (Default build dir names are formatted like this: obj-_architecture_-_device_-_os_-_os type_).
+     - After that, save your config and execute the `run` command in the plonKsole
 6. Modify this profile to your needs [(More about that here)](#2-modifying-your-browser-profile)
-7. Verify, that your changes are reproducible [(How?)](#3-building-firefox)
+7. Verify, that your changes are reproducible [(How?)](#6-making-sure-that-your-changes-are-reproducible)
 8. Verify, that other team members like your changes
 9. Once you get the green flag from others `push` your changes to GitHub
 
@@ -47,6 +53,7 @@ By default, plinK preserves everything in the browser profile folder (except cac
   - Preserving profile settings.
   - Preserving extensions.
   - Preserving specific folders.
+  - Ignoring specific folders and files (**beta**)
   - _(the plinK.buildconfig file is a .yaml file with a different extension)_
   
 Modifying the user profile
@@ -94,12 +101,13 @@ profile build
 ```
 
 ### ✨ Profile Data Preservation:
-- Bookmarks, extensions, and specific folders can be copied over from the `obj-x86_64-pc-windows-msvc/tmp/profile-default` directory to the `plinK_data/profile` folder.
+- Bookmarks, extensions, and specific folders can be copied over from the `"build dir"/tmp/profile-default` directory to the `plinK_data/profile` folder.
   
 - **Profile options** can be configured in `plinK.buildconfig` for:
   - Preserving bookmarks.
   - Extensions.
   - Folders you wish to save.
+  - Etc.
 
 _(Make sure to run this before pushing to GitHub)_
 
@@ -119,7 +127,24 @@ This command will:
   
 ---
 
-## 6. Other Commands
+## 6. Making sure, that your changes are reproducible
+
+Before you push your changes into production you will need to make sure they are reproducible. Take these steps + whatever other devs told you to do:
+ - Close all browser windows
+ - Build your profile, if you haven't already
+ - Run the `clear cache` command
+ - Build the browser
+ - Verify, that your changes were applied
+ - If they were, push your changes onto GitHub
+   - Ask other devs if the changes work on their machines
+ - If not
+   - cry :c
+   - Make sure your changes don't change something, that is in the [known limitations](#8-known-issues)
+   - Try again to make sure it was not user error
+   - If it wasn't contact ItzFimes(meee :3) and i'll try to help you to resolve your issue/mark it as a known bug and solve it in the future
+
+---
+## 7. Other Commands
 
 ### ♻️ Clearing the Cache:
 To clear Firefox’s build cache, use the command:
@@ -167,7 +192,7 @@ and then press `ctrl+c` to close plinK
 (Using only ctrl+c is not recommended as you may interrupt some operations)
 
 ---
-## 7. Known Issues
+## 8. Known Issues
 - Extensions need to be installed through `about:debugging`. **If the extension does more than just modifying settings IT WILL ONLY BE INSTALLED TEMPORARILY**. That means, that most extensions won't be able to install. (This is not a problem with plinK)
 - Long Mach builds breaking rendering (invalid ascii color codes) on certain terminals
 ---
